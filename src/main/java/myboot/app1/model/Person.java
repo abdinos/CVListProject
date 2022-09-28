@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Person {
 
     @Id
     @Column
