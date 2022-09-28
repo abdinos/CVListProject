@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -33,15 +34,18 @@ class ActivityServiceTest {
         assertEquals(ActivityNature.FORMATION, expected.getNature());
         String expectedMessage = activityService.deleteActivity(expected.getId());
         assertEquals("activity deleted " + expected.getId(), expectedMessage);
+        assertThrows(NoSuchElementException.class,() ->{
+            activityService.getActivity(activity.getId());
+
+        });
     }
 
     @Test
     public void testUpdateActivity() {
         Activity activity = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IDL", "cv.com");
-        // Activity updatedActivity = new Activity(2022,ActivityNature.EXPERIENCE,"Stage", "Stage : supra steria","cv.com");//
+        activityService.saveActivity(activity);
         activity.setYear(2021);
         Activity expected = activityService.updateActivity(activity);
-        ;
         assertEquals(2021, expected.getYear());
 
     }

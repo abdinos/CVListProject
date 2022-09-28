@@ -17,7 +17,7 @@ public class CurriculumVitae {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Activity> activities = new ArrayList<>();
 
     public int getId() {
