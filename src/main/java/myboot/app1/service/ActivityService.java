@@ -31,6 +31,7 @@ public class ActivityService {
         ac.setTitle(activity.getTitle());
         ac.setYear(activity.getYear());
         ac.setWebsite(activity.getWebsite());
+        activityRepository.save(ac);
         return ac;
     }
 
