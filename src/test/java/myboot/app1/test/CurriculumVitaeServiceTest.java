@@ -50,7 +50,7 @@ class CurriculumVitaeServiceTest {
     }
 
         @Test
-        void testGetActivity () {
+        void testGetCV () {
             CurriculumVitae cv = new CurriculumVitae();
             cv.getActivities().add(activity1);
             cv.getActivities().add(activity2);
@@ -61,7 +61,7 @@ class CurriculumVitaeServiceTest {
 
 
         @Test
-        void testDeleteActivity () {
+        void testDeleteCV () {
             CurriculumVitae cv = new CurriculumVitae();
             cv.getActivities().add(activity1);
             cv.getActivities().add(activity2);
@@ -75,7 +75,7 @@ class CurriculumVitaeServiceTest {
         }
 
         @Test
-        void testUpdateActivity () {
+        void testUpdateCV() {
             CurriculumVitae cv = new CurriculumVitae();
             cv.getActivities().add(activity1);
             cv.getActivities().add(activity2);
