@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<Person,Long> {
+public interface PersonRepository extends JpaRepository<Person,Long> {
 
 }
 

@@ -4,7 +4,9 @@ import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PersonService {
     @Autowired
     PersonRepository personRepository;
@@ -13,12 +15,12 @@ public class PersonService {
         return personRepository.save(person);
     }
 
-    public Person getPerson(int id){
+    public Person getPerson(Long id){
         return personRepository.findById((long) id).get();
     }
 
-    public String deletePersonById(int id){
-        personRepository.deleteById((long) id);
+    public String deletePersonById(Long id){
+        personRepository.deleteById( id);
         return "person deleted "+id;
     }
 
