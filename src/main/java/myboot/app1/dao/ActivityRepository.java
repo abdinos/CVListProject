@@ -13,6 +13,6 @@ import java.util.List;
 @Transactional
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity,Integer> {
-    @Query("select a from Activity a where a.title = ?1")
+    @Query("select a from Activity a where a.title LIKE ?1")
     List<Activity> getActivitiesByTitle(String title);
 }
