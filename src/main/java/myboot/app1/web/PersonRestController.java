@@ -18,8 +18,6 @@ public class PersonRestController {
 
     @Autowired
     PersonRepository personRepository;
-    @Autowired
-    LocalValidatorFactoryBean validatorFactoryBean;
 
     @Autowired
     public PersonRestController(PersonRepository personRepository){

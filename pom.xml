@@ -125,5 +125,18 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
+		<!--Ajout VueJS & Axious-->
+		<!-- Pour Vue.js -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>vue</artifactId>
+			<version>3.2.19</version>
+		</dependency>
+		<!-- Pour Axios -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>axios</artifactId>
+			<version>0.22.0</version>
+		</dependency>
 	</dependencies>
 </project>

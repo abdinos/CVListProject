@@ -13,9 +13,9 @@ import java.util.List;
 @Transactional
 public interface PersonRepository extends CrudRepository<Person,Long> {
 
-    @Query("select p from Person p where p.firstName = ?1")
+    @Query("select p from Person p where p.firstName LIKE ?1")
     List<Person> getPersonByFirstName(String firstName);
-    @Query("select p from Person p where p.lastName = ?1")
+    @Query("select p from Person p where p.lastName LIKE ?1")
     List<Person> getPersonByLastName(String lastName);
 }
 
