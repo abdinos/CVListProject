@@ -17,5 +17,8 @@ public interface PersonRepository extends CrudRepository<Person,Long> {
     List<Person> getPersonByFirstName(String firstName);
     @Query("select p from Person p where p.lastName LIKE ?1")
     List<Person> getPersonByLastName(String lastName);
+    @Query("select p from Person p where p.email LIKE ?1")
+    List<Person> getPersonByEmail(String email);
+
 }
 
