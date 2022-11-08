@@ -52,7 +52,6 @@ class UserControllerTest {
         ResponseEntity<String> jwt = restTemplate
                 .postForEntity(baseUrl + "login?username=aaa&password=aaa", null, String.class);
 
-
         // Login out user
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + jwt.getBody());
