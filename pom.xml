@@ -137,5 +137,17 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
+		<!-- Pour Vue.js -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>vue</artifactId>
+			<version>3.2.19</version>
+		</dependency>
+		<!-- Pour Axios -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>axios</artifactId>
+			<version>0.22.0</version>
+		</dependency>
 	</dependencies>
 </project>

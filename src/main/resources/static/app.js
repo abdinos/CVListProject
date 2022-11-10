@@ -4,9 +4,10 @@ const myApp = {
     data() {
         console.log("data");
         return {
-            counter: 1,
-            message: "Hello",
-            list: [10, 20, 30],
+            user: {
+                login: "",
+                password: ""
+            },
             axios: null,
         }
     },
@@ -23,8 +24,13 @@ const myApp = {
 
     methods: {
         // Place pour les futures méthodes
+        login: function (){
+            // this.axios.post("/secu-users/login")
+            //     .then(r => r.json())
+            //     .then(data => console.log(data));
+            console.log("logiiiiiiiiiiiiiiiiiin")
 
+        }
     }
 }
-
 Vue.createApp(myApp).mount('#myApp');

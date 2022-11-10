@@ -1,8 +1,11 @@
 package myboot.app1.web;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
+import myboot.app1.dao.XUserRepository;
+import myboot.app1.model.Person;
 import myboot.app1.security.JwtProvider;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import myboot.app1.model.XUser;
 import myboot.app1.security.UserService;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * L'API d'authentification
@@ -32,22 +38,28 @@ public class UserController {
 
 	private ModelMapper modelMapper = new ModelMapper();
 
+	@Autowired
+	XUserRepository xUserRepository;
+	@PostConstruct
+	public void init() {
+		System.out.println("Start " + this);
+		if (xUserRepository.count() == 0) {
+			xUserRepository.save(new XUser("aaa","123"));
+		}
+	}
+
 	/**
 	 * Authentification et récupération d'un JWT
 	 */
 
 	@PostMapping("/login")
 	public String login(//
-			@RequestParam String username, //
-			@RequestParam String password) {
+			@RequestParam("username") String username, //
+			@RequestParam("password") String password) {
 		return userService.login(username, password);
 	}
 
-	@RequestMapping(value = "/login")
-	private ModelAndView login() {
-		var res = new ModelAndView("login");
-		return res;
-	}
+
 
 	/**
 	 * Ajouter un utilisateur

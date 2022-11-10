@@ -26,4 +26,9 @@ public class XUser {
 
     @ElementCollection(fetch = FetchType.EAGER)
     Set<String> roles;
+
+    public XUser(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 }
