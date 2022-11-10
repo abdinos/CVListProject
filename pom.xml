@@ -125,18 +125,17 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
-		<!--Ajout VueJS & Axious-->
-		<!-- Pour Vue.js -->
+		<!--===== ModelMapper  ======-->
 		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>vue</artifactId>
-			<version>3.2.19</version>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
 		</dependency>
-		<!-- Pour Axios -->
+		<!--==== jwt ====-->
 		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>axios</artifactId>
-			<version>0.22.0</version>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
 		</dependency>
 	</dependencies>
 </project>

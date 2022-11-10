@@ -11,7 +11,7 @@ public class RootController {
 	 */
 	@RequestMapping("/")
 	public String index() {
-		return "redirect:/movies";
+		return "redirect:/";
 	}
 
 }

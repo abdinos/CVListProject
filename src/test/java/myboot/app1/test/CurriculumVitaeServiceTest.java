@@ -3,11 +3,10 @@ package myboot.app1.test;
 import myboot.app1.model.Activity;
 import myboot.app1.model.ActivityNature;
 import myboot.app1.model.CurriculumVitae;
+import myboot.app1.model.Person;
 import myboot.app1.service.ActivityService;
 import myboot.app1.service.CurriculumVitaeService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 class CurriculumVitaeServiceTest {
 
@@ -29,6 +29,7 @@ class CurriculumVitaeServiceTest {
 
     @BeforeEach
     void populate(){
+
         activity1 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IDL", "cv.com");
        activity2= new Activity(2021, ActivityNature.EXPERIENCE, "Stage M1", "Stage M1 IDL", "cv.com");
        activity3 =  new Activity(2023, ActivityNature.AUTRE, "M2-info", "formation : M2 - IDL", "cv.com");
@@ -68,10 +69,7 @@ class CurriculumVitaeServiceTest {
             curriculumVitaeService.saveCV(cv);
             String expected = curriculumVitaeService.deleteCV(cv.getId());
             assertEquals("CV deleted " + cv.getId(),expected);
-            assertThrows(NoSuchElementException.class,() ->{
-                curriculumVitaeService.getCV(cv.getId());
-
-            });
+            assertThrows(NoSuchElementException.class,() -> curriculumVitaeService.getCV(cv.getId()));
         }
 
         @Test
