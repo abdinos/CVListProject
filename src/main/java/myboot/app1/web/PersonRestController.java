@@ -1,70 +1,61 @@
 package myboot.app1.web;
+
+
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.web.servlet.oauth2.client.OAuth2ClientSecurityMarker;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.webjars.NotFoundException;
 
-import javax.swing.text.html.Option;
-import java.util.List;
-import java.util.Optional;
+import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
+@RequestMapping("/api/")
 @RestController
-@RequestMapping("/api")
 public class PersonRestController {
+
 
     @Autowired
     PersonRepository personRepository;
-    @Autowired
-    LocalValidatorFactoryBean validatorFactoryBean;
 
-    @Autowired
-    public PersonRestController(PersonRepository personRepository){
-        this.personRepository = personRepository;
+    @PostConstruct
+    public void init() {
+        System.out.println("Start " + this);
+        if (personRepository.count() == 0) {
+            personRepository.save(new Person("Abdessattar","Despair","2024","","","",""));
+            personRepository.save(new Person("Yanis","Arsenic","2024","","","",""));
+        }
     }
 
-    @GetMapping("/persons")
-    public Iterable<Person> getPersons(@RequestParam (value = "name", required = false) String name){
-        if(name != null){
-            List<Person> personByFirstName = personRepository.getPersonByFirstName(name);
-            List<Person> personByLastName = personRepository.getPersonByLastName(name);
-            if (!personByFirstName.isEmpty()){
-                return personByFirstName;
-            }else if(!personByLastName.isEmpty()){
-                return personByLastName;
-            }
-        }
+
+    @GetMapping(value = "/persons")
+    public Iterable<Person>  getPersons() {
         return personRepository.findAll();
     }
 
     @GetMapping("/persons/{id}")
-    public Person getPerson(@PathVariable Long id){
-        return personRepository.findById(id).orElseThrow();
+    public Person getPerson(@PathVariable long id) {
+        return personRepository.findById(id).get();
     }
 
     @DeleteMapping("/persons/{id}")
-    public void deletePerson(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteMovie(@PathVariable long id) {
         personRepository.deleteById(id);
     }
 
     @PostMapping("/persons")
-    public void postPerson(Person person){
-        personRepository.save(person);
+    public Person postMovie(@RequestBody @Valid Person m) {
+        personRepository.save(m);
+        return m;
     }
 
-    @PutMapping("/persons/{id}")
-    public void putPerson(Person person, @PathVariable Long id) throws Exception {
-        Optional<Person> p = personRepository.findById(id);
-        if (p.isPresent()){
-            personRepository.save(person);
-        }else {
-            throw new Exception("Person Not Found");
-        }
 
 
-    }
+
+
+
 
 }

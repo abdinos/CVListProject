@@ -43,6 +43,12 @@ public class UserController {
 		return userService.login(username, password);
 	}
 
+	@RequestMapping(value = "/login")
+	private ModelAndView login() {
+		var res = new ModelAndView("login");
+		return res;
+	}
+
 	/**
 	 * Ajouter un utilisateur
 	 */

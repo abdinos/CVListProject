@@ -12,6 +12,13 @@
 
 <div id="myApp">
     <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#/">Parcours des CV</a>
+            <a class="navbar-brand" href="/secu-users/login">connexion</a>
+
+        </nav>
+
+
         <h1>My application</h1>
         <p>Hello.</p>
     </div>

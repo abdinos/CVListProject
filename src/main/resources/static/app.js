@@ -23,6 +23,7 @@ const myApp = {
 
     methods: {
         // Place pour les futures méthodes
+
     }
 }
 
