@@ -33,6 +33,8 @@ public class UserService {
 	public String login(String username, String password) {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========avant==============<<<<<<<<<<<<<<<<<<<<<<<<<");
+
 			var user = userRepository.findById(username).get();
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========USER==============<<<<<<<<<<<<<<<<<<<<<<<<<");
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=========="+user.getUserName()+"==============<<<<<<<<<<<<<<<<<<<<<<<<<");

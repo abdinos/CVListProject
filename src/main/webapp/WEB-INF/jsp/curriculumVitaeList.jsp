@@ -17,11 +17,33 @@
         <table class="table">
             <tr>
                 <th>CV</th>
+                <th>voir CV </th>
             </tr>
             <tr v-for="cv in cvList">
                 <td>{{cv.cvName}}</td>
+                <td><button v-on:click="getCvActivities(cv.id)">Montrer</button></td>
             </tr>
         </table>
+
+        <div v-if="(cv != null)">
+            <h1>CV</h1>
+            <p>nom : {{cv.cvName}}</p>
+            <h1>Liste des activities</h1>
+            <table class="table">
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Site</th>
+                    <th>Annee</th>
+                </tr>
+                <tr v-for="activity in cv.activities">
+                    <td>{{activity.title}}</td>
+                    <td>{{activity.description}}</td>
+                    <td>{{activity.website}}</td>
+                    <td>{{activity.year}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 <script src="${app}"></script>

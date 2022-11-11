@@ -7,6 +7,7 @@ import myboot.app1.model.ActivityNature;
 import myboot.app1.model.CurriculumVitae;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,4 +47,17 @@ public class CurriculumVitaeRestController {
     public Iterable<CurriculumVitae> getCvList(){
         return curriculumVitaeRepository.findAll();
     }
+
+    @GetMapping("/cv/{id}")
+    public CurriculumVitae getCurriculumVitae(@PathVariable int id){
+         CurriculumVitae cv = curriculumVitaeRepository.findById(id).orElseThrow();
+         return cv;
+    }
+
+    @GetMapping("/cvActivities/{id}")
+    public Iterable<Activity> getCurriculumVitaeActivities(@PathVariable int id){
+        CurriculumVitae cv = curriculumVitaeRepository.findById(id).orElseThrow();
+        return cv.getActivities();
+    }
+
 }

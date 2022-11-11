@@ -10,6 +10,7 @@ const myApp = {
             },
             activities: [],
             cvList: [],
+            cv: null,
             axios: null,
         }
     },
@@ -24,16 +25,13 @@ const myApp = {
         });
         this.getActivities();
         this.getCvList();
+        this.getCvActivities();
     },
 
     methods: {
         // Place pour les futures méthodes
         login: function (){
-            axios.post("http://localhost:8081/users/login",{
-                data:{
-
-                }
-                },
+            axios.post("http://localhost:8081/users/login",
                 {
                     headers: {
                         'Accept': "application/json",
@@ -43,7 +41,7 @@ const myApp = {
                 })
                 .then(data => console.log(data))
                 .catch(err => console.log(">>>>>>>>>>>>>>",err))
-            //console.log("btn login pressed ")
+            console.log("btn login pressed ")
         },
         getActivities: function (){
             axios.get("http://localhost:8081/api/activities")
@@ -58,6 +56,15 @@ const myApp = {
                     console.log("get cvList done");
                     this.cvList = r.data}
                 )
+        },
+        getCvActivities: function (id){
+            axios.get("http://localhost:8081/api/cv/"+id)
+                .then(r => {
+                    console.log("show cv"+id+" done");
+                    this.cv = r.data;
+                });
+
+
         }
     }
 }
