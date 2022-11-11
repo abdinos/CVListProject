@@ -5,9 +5,11 @@ const myApp = {
         console.log("data");
         return {
             user: {
-                login: "",
+                username: "",
                 password: ""
             },
+            activities: [],
+            cvList: [],
             axios: null,
         }
     },
@@ -20,16 +22,42 @@ const myApp = {
             timeout: 1000,
             headers: { 'Content-Type': 'application/json' },
         });
+        this.getActivities();
+        this.getCvList();
     },
 
     methods: {
         // Place pour les futures méthodes
         login: function (){
-            // this.axios.post("/secu-users/login")
-            //     .then(r => r.json())
-            //     .then(data => console.log(data));
-            console.log("logiiiiiiiiiiiiiiiiiin")
+            axios.post("http://localhost:8081/users/login",{
+                data:{
 
+                }
+                },
+                {
+                    headers: {
+                        'Accept': "application/json",
+                        'Content-Type': 'application/json'
+                    },
+                    //body: JSON.stringify(this.user)
+                })
+                .then(data => console.log(data))
+                .catch(err => console.log(">>>>>>>>>>>>>>",err))
+            //console.log("btn login pressed ")
+        },
+        getActivities: function (){
+            axios.get("http://localhost:8081/api/activities")
+                .then(r => {
+                    console.log("get activities done");
+                    this.activities = r.data}
+                )
+        },
+        getCvList: function (){
+            axios.get("http://localhost:8081/api/cvList")
+                .then(r => {
+                    console.log("get cvList done");
+                    this.cvList = r.data}
+                )
         }
     }
 }

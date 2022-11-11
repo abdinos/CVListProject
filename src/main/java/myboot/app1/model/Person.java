@@ -39,7 +39,6 @@ public class Person {
     private String password;
 
 
-
     public void setId(Long id) {
         this.id = id;
     }

@@ -26,7 +26,7 @@ class UserControllerTest {
     @Autowired
     UserService userService;
 
-    private final String baseUrl = "http://localhost:8081/secu-users/";
+    private final String baseUrl = "http://localhost:8081/users/";
     @Test
     public void getUserJWT() {
         RestTemplate restTemplate = new RestTemplate();

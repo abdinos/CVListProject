@@ -16,13 +16,13 @@
             <div class="container">
                 <div>
                     <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username"  v-model="user.login" name="username" required>
+                    <input type="text" placeholder="Enter Username"  v-model="user.username" name="username" required>
                 </div>
                 <div>
                     <label for="password"><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" v-model="user.password" name="password" required>
                 </div>
-                <button type="submit" v-on:click="login" >Login</button>
+                <button type="submit" >Login</button>
             </div>
         </form>
     </div>

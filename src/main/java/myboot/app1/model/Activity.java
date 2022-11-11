@@ -32,6 +32,10 @@ import javax.persistence.*;
         private String website;
 
 
+        @ManyToOne(targetEntity=CurriculumVitae.class)
+        @JoinColumn(name="cv_id")
+        CurriculumVitae curriculumVitae;
+
         public Activity(int year, ActivityNature nature, String title, String description, String website) {
             this.year = year;
             this.nature = nature;

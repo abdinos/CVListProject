@@ -22,7 +22,6 @@ class ActivityServiceTest {
 
     @BeforeEach
     void populate(){
-        Person owner = new Person();
         activity = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IDL", "cv.com");
 
     }
