@@ -12,4 +12,10 @@ public class VueAppController {
         return new ModelAndView("app");
     }
 
+    @RequestMapping(value = "/login")
+    private ModelAndView login() {
+        var res = new ModelAndView("login");
+        return res;
+    }
+
 }
