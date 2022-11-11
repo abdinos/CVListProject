@@ -34,6 +34,9 @@ public class UserService {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 			var user = userRepository.findById(username).get();
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========USER==============<<<<<<<<<<<<<<<<<<<<<<<<<");
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=========="+user.getUserName()+"==============<<<<<<<<<<<<<<<<<<<<<<<<<");
+
 			return jwtTokenProvider.createToken(user);
 		} catch (AuthenticationException e) {
 			throw new MyJwtException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);

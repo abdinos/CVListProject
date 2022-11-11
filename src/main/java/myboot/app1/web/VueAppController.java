@@ -18,4 +18,17 @@ public class VueAppController {
         return res;
     }
 
+    @RequestMapping(value = "/activities")
+    private ModelAndView activities() {
+        var res = new ModelAndView("activities");
+        return res;
+    }
+
+    @RequestMapping(value = "/cvList")
+    private ModelAndView cvList() {
+        var res = new ModelAndView("curriculumVitaeList");
+        return res;
+    }
+
+
 }

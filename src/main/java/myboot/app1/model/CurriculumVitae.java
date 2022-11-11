@@ -15,10 +15,17 @@ public class CurriculumVitae {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Basic
+    @Column
+    String cvName;
+
+    @OneToMany(targetEntity=Activity.class,cascade={CascadeType.MERGE},orphanRemoval=true)
     private List<Activity> activities = new ArrayList<>();
 
 
+    public CurriculumVitae(String cvName) {
+        this.cvName = cvName;
+    }
 
     public int getId() {
         return id;

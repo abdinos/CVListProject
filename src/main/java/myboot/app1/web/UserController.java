@@ -25,7 +25,7 @@ import java.util.HashSet;
  * L'API d'authentification
  */
 @RestController
-@RequestMapping("/secu-users")
+@RequestMapping("/users")
 @Profile("usejwt")
 @Slf4j
 public class UserController {
@@ -56,6 +56,7 @@ public class UserController {
 	public String login(//
 			@RequestParam("username") String username, //
 			@RequestParam("password") String password) {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========LOGIN==============<<<<<<<<<<<<<<<<<<<<<<<<<");
 		return userService.login(username, password);
 	}
 
