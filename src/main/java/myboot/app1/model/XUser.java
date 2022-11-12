@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class XUser {
 
     @Id
-    String userName;
+    String username;
 
     @Basic
     String password;
@@ -27,8 +27,8 @@ public class XUser {
     @ElementCollection(fetch = FetchType.EAGER)
     Set<String> roles;
 
-    public XUser(String userName, String password) {
-        this.userName = userName;
+    public XUser(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }

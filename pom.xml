@@ -149,5 +149,11 @@
 			<artifactId>axios</artifactId>
 			<version>0.22.0</version>
 		</dependency>
+		<!-- vue-router -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>vue-router</artifactId>
+			<version>4.1.5</version>
+		</dependency>
 	</dependencies>
 </project>
