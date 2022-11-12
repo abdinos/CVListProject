@@ -12,6 +12,7 @@ const myApp = {
             cvList: [],
             cv: null,
             axios: null,
+
         }
     },
 
@@ -65,7 +66,8 @@ const myApp = {
                 });
 
 
-        }
+        },
+
     }
 }
 Vue.createApp(myApp).mount('#myApp');

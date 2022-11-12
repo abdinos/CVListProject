@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: a18013526
   Date: 11/11/2022
-  Time: 11:38
+  Time: 16:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ include file="/WEB-INF/jsp/header.jsp"%>
@@ -14,19 +14,21 @@
     <div class="container">
         <h1> My CVs</h1>
         <form action="/result/find" id="searchForm" >
-            <button class="btnSearchInput" type="button" ><i class="fas fa-search"></i></button>
+            <button class="btnSearchInput" type="button"><i class="fas fa-search"></i></button>
             <input  class="searchInput" type="search" placeholder="Rechercher..." aria-label="Search" name="name">
         </form>
-        <h1>Liste des CVs</h1>
+        <h1>resultat</h1>
         <table class="table">
             <tr>
                 <th>CV</th>
                 <th>voir CV </th>
             </tr>
-            <tr v-for="cv in cvList">
-                <td>{{cv.cvName}}</td>
-                <td><button v-on:click="getCvActivities(cv.id)">Montrer</button></td>
-            </tr>
+            <c:forEach items="${cvResult}" var="cv">
+                <tr>
+                    <td> <c:out value="${cv.cvName}" /> </td>
+                    <td><button v-on:click="getCvActivities(${cv.id})">Montrer</button></td>
+                </tr>
+            </c:forEach>
         </table>
 
         <div v-if="(cv != null)">
@@ -53,3 +55,4 @@
 <script src="${app}"></script>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp"%>
+

@@ -1,11 +1,17 @@
 package myboot.app1.web;
 
+import myboot.app1.dao.CurriculumVitaeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller()
 public class VueAppController {
+
+    @Autowired
+    CurriculumVitaeRepository curriculumVitaeRepository;
 
     @RequestMapping(value = "/app")
     private ModelAndView hello() {
@@ -28,6 +34,14 @@ public class VueAppController {
     private ModelAndView cvList() {
         var res = new ModelAndView("curriculumVitaeList");
         return res;
+    }
+
+    @RequestMapping(value = "/result/find")
+    private ModelAndView search(@RequestParam("name")String name) {
+        var result = curriculumVitaeRepository.getCurriculumVitaeByName(name);
+        var res = new ModelAndView("resultCvSearch", "cvResult", result);
+        return res;
+
     }
 
 
