@@ -4,6 +4,7 @@ import myboot.app1.dao.CurriculumVitaeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +28,12 @@ public class VueAppController {
     @RequestMapping(value = "/activities")
     private ModelAndView activities() {
         var res = new ModelAndView("activities");
+        return res;
+    }
+
+    @RequestMapping(value = "/create-cv")
+    private ModelAndView createCV() {
+        var res = new ModelAndView("create-cv");
         return res;
     }
 

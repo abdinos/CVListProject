@@ -5,10 +5,12 @@ import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.model.Activity;
 import myboot.app1.model.ActivityNature;
 import myboot.app1.model.CurriculumVitae;
+import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.Arrays;
 
 @RestController
@@ -37,6 +39,12 @@ public class CurriculumVitaeRestController {
             cv2.getActivities().add(activity3);
             cv2.getActivities().add(activity4);
             curriculumVitaeRepository.save(cv2);
+            CurriculumVitae cv3 = new CurriculumVitae("cv3");
+            curriculumVitaeRepository.save(cv3);
+
+
+
+
 
     }
 
@@ -56,6 +64,12 @@ public class CurriculumVitaeRestController {
     public Iterable<Activity> getCurriculumVitaeActivities(@PathVariable int id){
         CurriculumVitae cv = curriculumVitaeRepository.findById(id).orElseThrow();
         return cv.getActivities();
+    }
+
+    @PostMapping("/cv")
+    public String postMovie(@RequestBody @Valid CurriculumVitae cv) {
+        curriculumVitaeRepository.save(cv);
+        return "redirect:/cv/"+cv.getId();
     }
 
 }

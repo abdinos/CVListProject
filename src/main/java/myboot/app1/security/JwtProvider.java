@@ -52,7 +52,7 @@ public class JwtProvider {
 
 	public String createToken(XUser user) {
 
-		Claims claims = Jwts.claims().setSubject(user.getUserName());
+		Claims claims = Jwts.claims().setSubject(user.getUsername());
 		claims.put("auth", user.getRoles().stream().filter(Objects::nonNull).collect(Collectors.toList()));
 
 		Date now = new Date();

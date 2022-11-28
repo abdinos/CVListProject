@@ -37,7 +37,7 @@ public class UserService {
 
 			var user = userRepository.findById(username).get();
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========USER==============<<<<<<<<<<<<<<<<<<<<<<<<<");
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=========="+user.getUserName()+"==============<<<<<<<<<<<<<<<<<<<<<<<<<");
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=========="+user.getUsername()+"==============<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 			return jwtTokenProvider.createToken(user);
 		} catch (AuthenticationException e) {
@@ -46,7 +46,7 @@ public class UserService {
 	}
 
 	public String signup(XUser user) {
-		if (userRepository.findById(user.getUserName()).isPresent()) {
+		if (userRepository.findById(user.getUsername()).isPresent()) {
 			throw new MyJwtException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -4,15 +4,11 @@ const myApp = {
     data() {
         console.log("data");
         return {
-            user: {
-                username: "",
-                password: ""
-            },
             activities: [],
             cvList: [],
             cv: null,
             axios: null,
-
+            router: null,
         }
     },
 
@@ -20,7 +16,7 @@ const myApp = {
     mounted() {
         console.log("Mounted ");
         this.axios = axios.create({
-            baseURL: 'http://localhost:8081/api/',
+            baseURL: 'http://localhost:8081/',
             timeout: 1000,
             headers: { 'Content-Type': 'application/json' },
         });
@@ -31,35 +27,44 @@ const myApp = {
 
     methods: {
         // Place pour les futures méthodes
-        login: function (){
-            axios.post("http://localhost:8081/users/login",
+        login:  function (){
+            console.log('start>>>>>>>btn login pressed ! ! ! ')
+            this.axios.post("users/login",
                 {
-                    headers: {
-                        'Accept': "application/json",
-                        'Content-Type': 'application/json'
-                    },
-                    //body: JSON.stringify(this.user)
-                })
-                .then(data => console.log(data))
-                .catch(err => console.log(">>>>>>>>>>>>>>",err))
-            console.log("btn login pressed ")
+                  data:{
+                      'username': this.user.username,
+                      'password': this.user.password
+                  }
+                }
+                ,{
+                headers:{
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(r => {
+                console.log(r.data)
+            })
+                .catch(err => console.log("errrrrr"))
+            // axios.defaults.headers.common['Authorization'] = `Authorization:Bearer ${r.data.token}`
+            // localStorage.setItem('userInfo', JSON.stringify(r))
+            console.log('end<<<<<<btn login pressed ! ! ! ')
+
         },
         getActivities: function (){
-            axios.get("http://localhost:8081/api/activities")
+            this.axios.get("api/activities")
                 .then(r => {
                     console.log("get activities done");
                     this.activities = r.data}
                 )
         },
         getCvList: function (){
-            axios.get("http://localhost:8081/api/cvList")
+            this.axios.get("api/cvList")
                 .then(r => {
                     console.log("get cvList done");
                     this.cvList = r.data}
                 )
         },
         getCvActivities: function (id){
-            axios.get("http://localhost:8081/api/cv/"+id)
+            this.axios.get("api/cv/"+id)
                 .then(r => {
                     console.log("show cv"+id+" done");
                     this.cv = r.data;
@@ -67,6 +72,15 @@ const myApp = {
 
 
         },
+        createCV: function (){
+            console.log("creating cv")
+            this.axios.post("api/cv")
+                .then(r=> {
+                    console.log(r.data)
+                    this.getCvList()
+                    //this.cvList.add(r.data)
+                })
+        }
 
     }
 }

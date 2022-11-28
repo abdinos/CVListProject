@@ -23,6 +23,7 @@
 
 <c:url var="vue_js" value="/webjars/vue/3.2.19/dist/vue.global.js" />
 <c:url var="axios_js" value="/webjars/axios/0.22.0/dist/axios.min.js" />
+<c:url var="vue_router_js" value="/webjars/vue-router/4.1.5/dist/vue-router.global.js" />
 
 <html>
 <head>
@@ -34,6 +35,8 @@
     <script src="${bootstrap_js}"></script>
     <script src="${vue_js}"></script>
     <script src="${axios_js}"></script>
+    <script src="${vue_router_js}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 </head>
 <body>
