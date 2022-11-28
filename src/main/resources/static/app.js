@@ -27,28 +27,28 @@ const myApp = {
 
     methods: {
         // Place pour les futures méthodes
-        login:  function (){
-            console.log('start>>>>>>>btn login pressed ! ! ! ')
-            this.axios.post("users/login",
-                {
-                  data:{
-                      'username': this.user.username,
-                      'password': this.user.password
-                  }
-                }
-                ,{
-                headers:{
-                    'Authorization': `Bearer ${this.token}`
-                }
-            }).then(r => {
-                console.log(r.data)
-            })
-                .catch(err => console.log("errrrrr"))
-            // axios.defaults.headers.common['Authorization'] = `Authorization:Bearer ${r.data.token}`
-            // localStorage.setItem('userInfo', JSON.stringify(r))
-            console.log('end<<<<<<btn login pressed ! ! ! ')
-
-        },
+        // login:  function (){
+        //     console.log('start>>>>>>>btn login pressed ! ! ! ')
+        //     this.axios.post("users/login",
+        //         {
+        //           data:{
+        //               'username': this.user.username,
+        //               'password': this.user.password
+        //           }
+        //         }
+        //         ,{
+        //         headers:{
+        //             'Authorization': `Bearer ${this.token}`
+        //         }
+        //     }).then(r => {
+        //         console.log(r.data)
+        //     })
+        //         .catch(err => console.log("errrrrr"))
+        //     // axios.defaults.headers.common['Authorization'] = `Authorization:Bearer ${r.data.token}`
+        //     // localStorage.setItem('userInfo', JSON.stringify(r))
+        //     console.log('end<<<<<<btn login pressed ! ! ! ')
+        //
+        // },
         getActivities: function (){
             this.axios.get("api/activities")
                 .then(r => {

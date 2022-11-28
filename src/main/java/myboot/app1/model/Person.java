@@ -38,6 +38,9 @@ public class Person {
     @Column
     private String password;
 
+    @OneToOne(targetEntity=CurriculumVitae.class,cascade={CascadeType.MERGE},orphanRemoval=true)
+    CurriculumVitae curriculumVitae;
+
 
     public void setId(Long id) {
         this.id = id;

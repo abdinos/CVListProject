@@ -3,6 +3,9 @@ package myboot.app1.web;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myboot.app1.dao.XUserRepository;
 import myboot.app1.model.Person;
@@ -32,12 +35,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private JwtProvider jwtProvider;
-
 	private ModelMapper modelMapper = new ModelMapper();
-
 	@Autowired
 	XUserRepository xUserRepository;
 	@PostConstruct
@@ -47,17 +47,12 @@ public class UserController {
 			xUserRepository.save(new XUser("aaa","123"));
 		}
 	}
-
-	/**
-	 * Authentification et récupération d'un JWT
-	 */
-
-	@PostMapping("/login")
+	/*** Authentification et récupération d'un JWT*/
+	@PostMapping("/loginUser")
 	public String login(//
-			@RequestParam("username") String username, //
-			@RequestParam("password") String password) {
+			@RequestBody UserCrededtials userCrededtials) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========LOGIN==============<<<<<<<<<<<<<<<<<<<<<<<<<");
-		return userService.login(username, password);
+		return userService.login(userCrededtials.getUsername(), userCrededtials.getPassword());
 	}
 
 
@@ -117,4 +112,15 @@ public class UserController {
 		jwtProvider.getJWTs().remove(jwt);
 		return "user logged out";
 	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	private class UserCrededtials{
+		private String username;
+		private String password;
+
+	}
 }
+
+
