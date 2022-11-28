@@ -2,6 +2,7 @@ package myboot.app1.web;
 
 import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.CurriculumVitaeRepository;
+import myboot.app1.dao.PersonRepository;
 import myboot.app1.model.Activity;
 import myboot.app1.model.ActivityNature;
 import myboot.app1.model.CurriculumVitae;
@@ -20,9 +21,17 @@ public class CurriculumVitaeRestController {
     CurriculumVitaeRepository curriculumVitaeRepository;
     @Autowired
     ActivityRepository activityRepository;
+
+    @Autowired
+    PersonRepository personRepository;
     @PostConstruct
     public void init() {
         System.out.println("Start " + this);
+
+            Person person1 = new Person("yanis", "amer", "", "", "", "", "");
+            Person person2 = new Person("abdessettar", "ould", "", "", "", "", "");
+            Person person3 = new Person("XXX", "YYY", "", "", "", "", "");
+            personRepository.saveAll(Arrays.asList(person1,person2,person3));
 
             Activity activity1 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IDL", "cv.com");
             Activity activity2 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - SID", "cv.com");
@@ -30,16 +39,16 @@ public class CurriculumVitaeRestController {
             Activity activity4 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IMD", "cv.com");
             Activity activity5 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - GIG", "cv.com");
             activityRepository.saveAll(Arrays.asList(activity1,activity2,activity3,activity4,activity5));
-            CurriculumVitae cv1 = new CurriculumVitae("cv1");
+            CurriculumVitae cv1 = new CurriculumVitae("cv1", person1);
             cv1.getActivities().add(activity1);
             cv1.getActivities().add(activity2);
             curriculumVitaeRepository.save(cv1);
-            CurriculumVitae cv2 = new CurriculumVitae("cv2");
+            CurriculumVitae cv2 = new CurriculumVitae("cv2", person2);
             cv2.getActivities().add(activity5);
             cv2.getActivities().add(activity3);
             cv2.getActivities().add(activity4);
             curriculumVitaeRepository.save(cv2);
-            CurriculumVitae cv3 = new CurriculumVitae("cv3");
+            CurriculumVitae cv3 = new CurriculumVitae("cv3", person3);
             curriculumVitaeRepository.save(cv3);
 
 

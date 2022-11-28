@@ -23,10 +23,12 @@
         <table class="table">
             <tr>
                 <th>CV</th>
+                <th>Personne</th>
                 <th>voir CV </th>
             </tr>
             <tr v-for="cv in cvList">
                 <td>{{cv.cvName}}</td>
+                <td>{{cv.person.firstName}}</td>
                 <td><button v-on:click="getCvActivities(cv.id)">Montrer</button></td>
             </tr>
         </table>

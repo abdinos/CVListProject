@@ -19,12 +19,17 @@ public class CurriculumVitae {
     @Column
     String cvName;
 
+    @OneToOne(targetEntity=Person.class)
+    @JoinColumn(name="person_id")
+    Person person;
+
     @OneToMany(targetEntity=Activity.class,cascade={CascadeType.MERGE},orphanRemoval=true)
     private List<Activity> activities = new ArrayList<>();
 
 
-    public CurriculumVitae(String cvName) {
+    public CurriculumVitae(String cvName, Person person) {
         this.cvName = cvName;
+        this.person = person;
     }
 
     public int getId() {

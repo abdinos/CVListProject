@@ -16,7 +16,7 @@ const login = {
     mounted() {
         console.log("Mounted ");
         this.axios = axios.create({
-            baseURL: 'http://localhost:8081/users/',
+            baseURL: 'http://localhost:8081/',
             timeout: 1000,
             headers: { 'Content-Type': 'application/json' },
         });
@@ -25,9 +25,9 @@ const login = {
 
     methods: {
         // Place pour les futures méthodes
-        login: async function(user){
-            //const {data} = await axios.post('login', user)
-            console.log("data")
+        authUser: async function(user){
+            const {data} = await axios.post('users/loginUser', user)
+            console.log(data)
 
         }
 

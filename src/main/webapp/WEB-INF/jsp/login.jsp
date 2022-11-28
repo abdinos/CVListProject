@@ -8,12 +8,12 @@
 <%@ include file="/WEB-INF/jsp/header.jsp"%>
 
 <c:url var="home" value="/aaa" />
-<c:url var="app" value="/app.js" />
+<c:url var="login" value="/login.js" />
 
 <div id="login">
     <main class="form-signin w-100 m-auto">
-        <form method="post" @submit.prevent="login(user)">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <form method="post" @submit.prevent="authUser(user)">
+            <h1 class="h3 mb-3 fw-normal">Please sign in XXXXXXXXXX</h1>
             <div class="form-floating">
 <%--                <label for="floatingInput">Username</label>--%>
                 <input type="text" class="form-control" id="floatingInput" placeholder="Username" v-model="user.username"  name="username" required>
@@ -28,6 +28,6 @@
     </main>
 
 </div>
-<script src="${app}"></script>
+<script src="${login}"></script>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp"%>
