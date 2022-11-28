@@ -4,16 +4,11 @@ const myApp = {
     data() {
         console.log("data");
         return {
-            user: {
-                username: "",
-                password: ""
-            },
             activities: [],
             cvList: [],
             cv: null,
             axios: null,
-            router: null
-
+            router: null,
         }
     },
 
@@ -32,14 +27,27 @@ const myApp = {
 
     methods: {
         // Place pour les futures méthodes
-        login: function (){
-            this.axios.post("users/login", {
-                username: this.user.username,
-                password: this.user.password
-            }).then(r =>{
-                    console.log(r)
-                    this.router.push("/app")
-                })
+        login:  function (){
+            console.log('start>>>>>>>btn login pressed ! ! ! ')
+            this.axios.post("users/login",
+                {
+                  data:{
+                      'username': this.user.username,
+                      'password': this.user.password
+                  }
+                }
+                ,{
+                headers:{
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(r => {
+                console.log(r.data)
+            })
+                .catch(err => console.log("errrrrr"))
+            // axios.defaults.headers.common['Authorization'] = `Authorization:Bearer ${r.data.token}`
+            // localStorage.setItem('userInfo', JSON.stringify(r))
+            console.log('end<<<<<<btn login pressed ! ! ! ')
+
         },
         getActivities: function (){
             this.axios.get("api/activities")
@@ -64,6 +72,15 @@ const myApp = {
 
 
         },
+        createCV: function (){
+            console.log("creating cv")
+            this.axios.post("api/cv")
+                .then(r=> {
+                    console.log(r.data)
+                    this.getCvList()
+                    //this.cvList.add(r.data)
+                })
+        }
 
     }
 }

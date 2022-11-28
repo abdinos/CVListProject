@@ -10,9 +10,9 @@
 <c:url var="home" value="/aaa" />
 <c:url var="app" value="/app.js" />
 
-<div id="myApp">
+<div id="login">
     <main class="form-signin w-100 m-auto">
-        <form @submit="login">
+        <form method="post" @submit.prevent="login(user)">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
             <div class="form-floating">
 <%--                <label for="floatingInput">Username</label>--%>
@@ -27,8 +27,6 @@
         </form>
     </main>
 
-
-</div>
 </div>
 <script src="${app}"></script>
 
