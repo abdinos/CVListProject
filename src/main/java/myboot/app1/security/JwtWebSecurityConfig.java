@@ -64,6 +64,8 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/userInfo").permitAll()//
 				.antMatchers("/secu-users/**").authenticated()//
 
+
+
 				// Autoriser le reste...
 				.anyRequest().permitAll();
 

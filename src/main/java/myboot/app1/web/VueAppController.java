@@ -27,6 +27,7 @@ public class VueAppController {
 
 
     @RequestMapping(value = "/profile")
+    @PreAuthorize("hasAuthority('USER')")
     private ModelAndView profile() {
         var res = new ModelAndView("profile");
         return res;

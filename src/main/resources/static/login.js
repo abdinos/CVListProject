@@ -9,7 +9,7 @@ const login = {
             user: {},
             token: null,
             isLoggedIn: false,
-            username : null
+            username : "xxxx"
         }
     },
 
@@ -29,17 +29,21 @@ const login = {
             const {data} = await this.axios.post('users/loginUser', user)
             this.token = data
             console.log(this.token)
-            await this.getUsername(this.token)
             localStorage.setItem('TOKEN',this.token)
             this.isLoggedIn = true
+            await this.getUsername(this.token)
+            window.location.href = "/profile"
+
 
         },
         getUsername: async function(token){
             const {data: username} = await this.axios.get('users/userInfo',{headers:{token}})
             console.log(username)
             if (username) {
-                localStorage.setItem("USERNAME", username)
                 this.username = username
+                console.log(this.username)
+                localStorage.setItem("USERNAME", username)
+
             }
         }
 
