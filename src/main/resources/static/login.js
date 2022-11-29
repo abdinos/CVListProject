@@ -17,7 +17,6 @@ const login = {
         console.log("Mounted ");
         this.axios = axios.create({
             baseURL: 'http://localhost:8081/',
-            timeout: 1000,
             headers: { 'Content-Type': 'application/json' },
         });
 
@@ -26,13 +25,24 @@ const login = {
     methods: {
         // Place pour les futures méthodes
         authUser: async function(user){
-            const {data} = await axios.post('users/loginUser', user)
-            console.log(data)
-            console.log('btn login ! ! ! ')
-            console.log(user.username)
-            console.log(user.password)
-
+            const {data} = await this.axios.post('users/loginUser', user)
+            this.token = data
+            console.log(this.token)
+            localStorage.setItem('TOKEN',this.token)
+            this.isLoggedIn = true
+            await this.getUsername(this.token)
+        },
+        getUsername: async function(token){
+            const t = localStorage.getItem(token)
+            const {data: username} = await this.axios.get('users/userInfo', {
+                headers: {
+                    'Authorization': `Bearer ${t}`
+                }
+            })
+            console.log(username)
+            localStorage.setItem("USERNAME",username)
         }
+
 
     }
 }

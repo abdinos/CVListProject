@@ -2,6 +2,7 @@ package myboot.app1.web;
 
 import myboot.app1.dao.CurriculumVitaeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,13 @@ public class VueAppController {
     @RequestMapping(value = "/login")
     private ModelAndView login() {
         var res = new ModelAndView("login");
+        return res;
+    }
+
+
+    @RequestMapping(value = "/profile")
+    private ModelAndView profile() {
+        var res = new ModelAndView("profile");
         return res;
     }
 

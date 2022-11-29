@@ -1,6 +1,7 @@
 package myboot.app1.web;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.AllArgsConstructor;
@@ -50,10 +51,9 @@ public class UserController {
 //	}
 	/*** Authentification et récupération d'un JWT*/
 	@PostMapping("/loginUser")
-	public String login(@RequestBody UserData body) {
+	public String login(@RequestBody XUser body) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========LOGIN==============<<<<<<<<<<<<<<<<<<<<<<<<<");
-		return "";
-		//return userService.login(crededtials.getUsername(), crededtials.getPassword());
+		return userService.login(body.getUsername(), body.getPassword());
 	}
 	@Data
 	@NoArgsConstructor
@@ -65,6 +65,17 @@ public class UserController {
 	}
 
 
+	@GetMapping("/userInfo")
+	public String getUsername(@RequestBody Token token){
+		return jwtProvider.getUsername(token.getToken());
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public class Token{
+		private String token;
+	}
 
 	/**
 	 * Ajouter un utilisateur

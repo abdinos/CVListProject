@@ -14,7 +14,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/cvList">Parcours des CV</a>
-            <a class="navbar-brand" href="/login">connexion</a>
+            <a class="navbar-brand" href="/login">Connexion</a>
 
         </nav>
         <h1>My application </h1>
