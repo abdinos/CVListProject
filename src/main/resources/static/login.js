@@ -28,6 +28,9 @@ const login = {
         authUser: async function(user){
             const {data} = await axios.post('users/loginUser', user)
             console.log(data)
+            console.log('btn login ! ! ! ')
+            console.log(user.username)
+            console.log(user.password)
 
         }
 

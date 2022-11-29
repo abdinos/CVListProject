@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import myboot.app1.model.XUser;
@@ -40,19 +41,27 @@ public class UserController {
 	private ModelMapper modelMapper = new ModelMapper();
 	@Autowired
 	XUserRepository xUserRepository;
-	@PostConstruct
-	public void init() {
-		System.out.println("Start " + this);
-		if (xUserRepository.count() == 0) {
-			xUserRepository.save(new XUser("aaa","123"));
-		}
-	}
+//	@PostConstruct
+//	public void init() {
+//		System.out.println("Start " + this);
+//		if (xUserRepository.count() == 0) {
+//			xUserRepository.save(new XUser("aaa","123"));
+//		}
+//	}
 	/*** Authentification et récupération d'un JWT*/
 	@PostMapping("/loginUser")
-	public String login(//
-			@RequestBody UserCrededtials userCrededtials) {
+	public String login(@RequestBody UserData body) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========LOGIN==============<<<<<<<<<<<<<<<<<<<<<<<<<");
-		return userService.login(userCrededtials.getUsername(), userCrededtials.getPassword());
+		return "";
+		//return userService.login(crededtials.getUsername(), crededtials.getPassword());
+	}
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public class UserData{
+		private String username;
+		private String password;
+
 	}
 
 
@@ -113,14 +122,7 @@ public class UserController {
 		return "user logged out";
 	}
 
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	private class UserCrededtials{
-		private String username;
-		private String password;
 
-	}
 }
 
 
