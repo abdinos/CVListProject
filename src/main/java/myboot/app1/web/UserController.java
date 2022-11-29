@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -64,16 +65,16 @@ public class UserController {
 
 	}
 
-
 	@GetMapping("/userInfo")
-	public String getUsername(@RequestBody Token token){
-		return jwtProvider.getUsername(token.getToken());
+	public ResponseEntity<String> getUsername(@RequestHeader String token){
+		var username =jwtProvider.getUsername(token);
+		return ResponseEntity.ok(username);
 	}
 
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public class Token{
+	public static class Token{
 		private String token;
 	}
 

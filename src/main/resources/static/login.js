@@ -9,6 +9,7 @@ const login = {
             user: {},
             token: null,
             isLoggedIn: false,
+            username : null
         }
     },
 
@@ -28,19 +29,18 @@ const login = {
             const {data} = await this.axios.post('users/loginUser', user)
             this.token = data
             console.log(this.token)
+            await this.getUsername(this.token)
             localStorage.setItem('TOKEN',this.token)
             this.isLoggedIn = true
-            await this.getUsername(this.token)
+
         },
         getUsername: async function(token){
-            const t = localStorage.getItem(token)
-            const {data: username} = await this.axios.get('users/userInfo', {
-                headers: {
-                    'Authorization': `Bearer ${t}`
-                }
-            })
+            const {data: username} = await this.axios.get('users/userInfo',{headers:{token}})
             console.log(username)
-            localStorage.setItem("USERNAME",username)
+            if (username) {
+                localStorage.setItem("USERNAME", username)
+                this.username = username
+            }
         }
 
 

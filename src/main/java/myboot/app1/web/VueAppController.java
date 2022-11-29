@@ -22,8 +22,7 @@ public class VueAppController {
 
     @RequestMapping(value = "/login")
     private ModelAndView login() {
-        var res = new ModelAndView("login");
-        return res;
+        return new ModelAndView("login");
     }
 
 
