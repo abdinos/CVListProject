@@ -36,7 +36,6 @@ public class UserService {
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========avant==============<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 			var user = userRepository.findById(username).get();
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========USER==============<<<<<<<<<<<<<<<<<<<<<<<<<");
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=========="+user.getUsername()+"==============<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 			return jwtTokenProvider.createToken(user);

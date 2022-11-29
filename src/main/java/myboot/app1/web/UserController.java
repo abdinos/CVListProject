@@ -1,6 +1,7 @@
 package myboot.app1.web;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import myboot.app1.model.XUser;
@@ -40,22 +42,40 @@ public class UserController {
 	private ModelMapper modelMapper = new ModelMapper();
 	@Autowired
 	XUserRepository xUserRepository;
-	@PostConstruct
-	public void init() {
-		System.out.println("Start " + this);
-		if (xUserRepository.count() == 0) {
-			xUserRepository.save(new XUser("aaa","123"));
-		}
-	}
+//	@PostConstruct
+//	public void init() {
+//		System.out.println("Start " + this);
+//		if (xUserRepository.count() == 0) {
+//			xUserRepository.save(new XUser("aaa","123"));
+//		}
+//	}
 	/*** Authentification et récupération d'un JWT*/
 	@PostMapping("/loginUser")
-	public String login(//
-			@RequestBody UserCrededtials userCrededtials) {
+	public String login(@RequestBody XUser body) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>==========LOGIN==============<<<<<<<<<<<<<<<<<<<<<<<<<");
-		return userService.login(userCrededtials.getUsername(), userCrededtials.getPassword());
+		return userService.login(body.getUsername(), body.getPassword());
+	}
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public class UserData{
+		private String username;
+		private String password;
+
 	}
 
 
+	@GetMapping("/userInfo")
+	public String getUsername(@RequestBody Token token){
+		return jwtProvider.getUsername(token.getToken());
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public class Token{
+		private String token;
+	}
 
 	/**
 	 * Ajouter un utilisateur
@@ -113,14 +133,7 @@ public class UserController {
 		return "user logged out";
 	}
 
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	private class UserCrededtials{
-		private String username;
-		private String password;
 
-	}
 }
 
 

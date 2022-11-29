@@ -59,13 +59,16 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Déclaration des end-points
 		http.authorizeRequests()//
 				.antMatchers("/secu-users/login").permitAll()//
+				.antMatchers("/users/loginUser").permitAll()//
 				.antMatchers("/secu-users/signup").permitAll()//
 				.antMatchers("/secu-users/**").authenticated()//
+				.antMatchers("/users/**").authenticated()//
 				// Autoriser le reste...
 				.anyRequest().permitAll();
 
 		// Pas vraiment nécessaire
 		http.exceptionHandling().accessDeniedPage("/secu-users/login");
+		http.exceptionHandling().accessDeniedPage("/users/loginUser");
 
 		// Mise en place du filtre JWT
 		http.apply(new JwtFilterConfigurer(jwtTokenProvider));
