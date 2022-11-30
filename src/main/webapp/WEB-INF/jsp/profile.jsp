@@ -4,7 +4,7 @@
 <c:url var="profile" value="/profile.js" />
 
 <div id="profile">
-    <div class="container">
+    <div class="container" v-if="(isLoggedIn)">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="">Edit CV</a>
             <a class="navbar-brand" href="">Create a person</a>

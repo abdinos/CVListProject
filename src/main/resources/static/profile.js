@@ -6,9 +6,10 @@ const profile = {
         return {
             axios: null,
             router: null,
-            username: "",
+            username: null,
             user: {},
             token: null,
+            isLoggedIn: false,
             isLoggedOut: false,
         }
     },
@@ -27,6 +28,10 @@ const profile = {
         // Place pour les futures méthodes
         getCurrentUser: function (){
             this.username = localStorage.getItem('USERNAME')
+            console.log(this.username)
+            if (this.username != null){
+                this.isLoggedIn = true
+            }
         },
         logoutUser: async function(){
             const res = await this.axios.get('users/logout')
@@ -34,9 +39,10 @@ const profile = {
             localStorage.removeItem('TOKEN')
             localStorage.removeItem('USERNAME')
             this.isLoggedOut = true
-            console.log(this.isLoggedIn)
+            console.log(this.isLoggedOut)
 
         },
+
 
     }
 }
