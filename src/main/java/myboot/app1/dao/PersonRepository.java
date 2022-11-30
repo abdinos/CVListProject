@@ -20,5 +20,7 @@ public interface PersonRepository extends CrudRepository<Person,Long> {
     @Query("select p from Person p where p.email LIKE ?1")
     List<Person> getPersonByEmail(String email);
 
+    public Person findPersonByEmail(String email);
+
 }
 

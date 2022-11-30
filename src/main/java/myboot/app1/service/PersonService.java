@@ -4,6 +4,7 @@ import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,6 +42,14 @@ public class PersonService {
         personRepository.save(p);
         return p;
 
+
+    }
+    public Person getPersonByEmail(String email){
+        if (personRepository.getPersonByEmail(email).isEmpty()){
+            return null;
+        }
+        Person person = personRepository.findPersonByEmail(email);
+        return person;
 
     }
 
