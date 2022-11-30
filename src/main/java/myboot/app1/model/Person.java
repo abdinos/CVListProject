@@ -42,6 +42,7 @@ public class Person {
     CurriculumVitae curriculumVitae;
 
 
+
     public void setId(Long id) {
         this.id = id;
     }

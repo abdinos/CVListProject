@@ -34,11 +34,11 @@ const profile = {
             }
         },
         logoutUser: async function(){
-            const res = await this.axios.get('users/logout')
-            console.log(res)
             localStorage.removeItem('TOKEN')
             localStorage.removeItem('USERNAME')
+            localStorage.clear()
             this.isLoggedOut = true
+            window.location.href = '/login'
             console.log(this.isLoggedOut)
 
         },

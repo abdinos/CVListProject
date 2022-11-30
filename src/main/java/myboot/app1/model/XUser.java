@@ -2,11 +2,7 @@ package myboot.app1.model;
 
 import java.util.Set;
 
-import javax.persistence.Basic;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
