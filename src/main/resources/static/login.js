@@ -9,7 +9,7 @@ const login = {
             user: {},
             token: null,
             isLoggedIn: false,
-            username : "xxxx"
+            username : null
         }
     },
 
@@ -20,6 +20,8 @@ const login = {
             baseURL: 'http://localhost:8081/',
             headers: { 'Content-Type': 'application/json' },
         });
+        //localStorage.clear()
+
 
     },
 
@@ -29,11 +31,11 @@ const login = {
             const {data} = await this.axios.post('users/loginUser', user)
             this.token = data
             console.log(this.token)
+            await this.getUsername(this.token)
             localStorage.setItem('TOKEN',this.token)
             this.isLoggedIn = true
-            await this.getUsername(this.token)
-            window.location.href = "/profile"
-
+            console.log(this.isLoggedIn)
+            window.location.href= '/profile'
 
         },
         getUsername: async function(token){
@@ -41,9 +43,7 @@ const login = {
             console.log(username)
             if (username) {
                 this.username = username
-                console.log(this.username)
-                localStorage.setItem("USERNAME", username)
-
+                localStorage.setItem('USERNAME', this.username)
             }
         }
 

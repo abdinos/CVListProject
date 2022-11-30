@@ -6,6 +6,10 @@ const profile = {
         return {
             axios: null,
             router: null,
+            username: "",
+            user: {},
+            token: null,
+            isLoggedOut: false,
         }
     },
 
@@ -16,12 +20,23 @@ const profile = {
             baseURL: 'http://localhost:8081/',
             headers: { 'Content-Type': 'application/json' },
         });
-
+        this.getCurrentUser()
     },
 
     methods: {
         // Place pour les futures méthodes
+        getCurrentUser: function (){
+            this.username = localStorage.getItem('USERNAME')
+        },
+        logoutUser: async function(){
+            const res = await this.axios.get('users/logout')
+            console.log(res)
+            localStorage.removeItem('TOKEN')
+            localStorage.removeItem('USERNAME')
+            this.isLoggedOut = true
+            console.log(this.isLoggedIn)
 
+        },
 
     }
 }

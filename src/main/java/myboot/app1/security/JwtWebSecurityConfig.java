@@ -62,12 +62,15 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/loginUser").permitAll()//
 				.antMatchers("/secu-users/signup").permitAll()//
 				.antMatchers("/users/userInfo").permitAll()//
+				.antMatchers("/users/logout").permitAll()//
+
 				.antMatchers("/secu-users/**").authenticated()//
 
 
 
 				// Autoriser le reste...
 				.anyRequest().permitAll();
+				//.anyRequest().authenticated().and();
 
 		// Pas vraiment nécessaire
 		http.exceptionHandling().accessDeniedPage("/secu-users/login");

@@ -25,7 +25,11 @@
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
+        <div v-if="(isLoggedIn)">
+            <h3>User Authenticated</h3>
+        </div>
     </main>
+
 
 </div>
 <script src="${login}"></script>
