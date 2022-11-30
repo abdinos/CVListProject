@@ -40,10 +40,10 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@PostConstruct
 	public void init() {
 		var encoder = passwordEncoder();
-		var aa = new XUser("aaa", encoder.encode("aaa"), Set.of("ADMIN", "USER"));
-		var bb = new XUser("bbb", encoder.encode("bbb"), Set.of("USER"));
-		userRepo.save(aa);
-		userRepo.save(bb);
+		//var aa = new XUser("aaa", encoder.encode("aaa"), Set.of("ADMIN", "USER"));
+		//var bb = new XUser("bbb", encoder.encode("bbb"), Set.of("USER"));
+		//userRepo.save(aa);
+		//userRepo.save(bb);
 		logger.debug("--- INIT SPRING SECURITY JWT");
 	}
 

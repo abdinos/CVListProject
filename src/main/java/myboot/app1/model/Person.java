@@ -41,6 +41,8 @@ public class Person {
     @OneToOne(targetEntity=CurriculumVitae.class,cascade={CascadeType.MERGE},orphanRemoval=true)
     CurriculumVitae curriculumVitae;
 
+    @OneToOne(targetEntity=XUser.class,cascade={CascadeType.MERGE},orphanRemoval=true)
+    XUser xUser;
 
 
     public void setId(Long id) {
