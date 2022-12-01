@@ -10,18 +10,20 @@ const profile = {
             user: {},
             activities: [],
             cv: null,
-            token: null,
+            token: localStorage.getItem('TOKEN'),
             isLoggedIn: false,
             isLoggedOut: false,
+
         }
     },
+
 
     // Mise en place de l'application
     mounted() {
         console.log("Mounted ");
         this.axios = axios.create({
             baseURL: 'http://localhost:8081/',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', },
         });
         this.getCurrentUser();
         this.getCvActivities();
@@ -46,7 +48,12 @@ const profile = {
             }
         },
         getCurrentUserCv: function (){
-            this.axios.get("api/profileCv")
+            let token = this.token;
+            this.axios.get("api/profileCv",{
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
                 .then(r => {
                     console.log("show cv done");
                     this.cv = r.data;
@@ -66,6 +73,6 @@ const profile = {
         },
 
 
-    }
+    },
 }
 Vue.createApp(profile).mount('#profile');

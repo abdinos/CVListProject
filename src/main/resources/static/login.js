@@ -10,6 +10,7 @@ const login = {
             token: null,
             isLoggedIn: false,
             username : null
+
         }
     },
 
@@ -21,6 +22,7 @@ const login = {
             headers: { 'Content-Type': 'application/json' },
         });
         //localStorage.clear()
+
 
 
     },
