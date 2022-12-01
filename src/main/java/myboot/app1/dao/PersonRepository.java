@@ -23,4 +23,3 @@ public interface PersonRepository extends CrudRepository<Person,Long> {
     public Person findPersonByEmail(String email);
 
 }
-

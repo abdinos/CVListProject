@@ -1,5 +1,6 @@
 package myboot.app1.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,11 +39,10 @@ public class Person {
     @Column
     private String password;
 
+    @JsonManagedReference
     @OneToOne(targetEntity=CurriculumVitae.class,cascade={CascadeType.MERGE},orphanRemoval=true)
     CurriculumVitae curriculumVitae;
 
-    @OneToOne(targetEntity=XUser.class,cascade={CascadeType.MERGE},orphanRemoval=true)
-    XUser xUser;
 
 
     public void setId(Long id) {

@@ -1,5 +1,6 @@
 package myboot.app1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 
@@ -33,6 +34,7 @@ import javax.persistence.*;
 
         @ManyToOne(targetEntity=CurriculumVitae.class)
         @JoinColumn(name = "cv_id")
+        @JsonBackReference
         CurriculumVitae curriculumVitae;
 
 

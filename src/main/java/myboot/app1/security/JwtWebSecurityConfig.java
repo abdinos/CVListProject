@@ -29,8 +29,6 @@ import myboot.app1.model.XUser;
 @Profile("usejwt")
 public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private XUserRepository userRepo;
 	
 	@Autowired
 	private JwtProvider jwtTokenProvider;
@@ -53,12 +51,14 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Pas de vérification CSRF (cross site request forgery)
 		http.csrf().disable();
 
-		// Spring security de doit gérer les sessions
+		// permet au Spring security de devoir gérer les sessions
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Déclaration des end-points
 		http.authorizeRequests()//
+
 				.antMatchers("/secu-users/login").permitAll()//
+				.antMatchers("/app").permitAll()//
 				.antMatchers("/users/loginUser").permitAll()//
 				.antMatchers("/secu-users/signup").permitAll()//
 				.antMatchers("/users/userInfo").permitAll()//
@@ -70,6 +70,7 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// Autoriser le reste...
 				.anyRequest().permitAll();
+
 
 		// Pas vraiment nécessaire
 		http.exceptionHandling().accessDeniedPage("/secu-users/login");

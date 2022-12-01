@@ -1,5 +1,7 @@
 package myboot.app1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,11 +21,13 @@ public class CurriculumVitae {
     @Column
     String cvName;
 
-    @OneToOne(targetEntity=Person.class)
+    @OneToOne(targetEntity=Person.class,cascade={CascadeType.MERGE},orphanRemoval=true)
     @JoinColumn(name="person_id")
+     @JsonBackReference
     Person person;
 
     @OneToMany(targetEntity=Activity.class,cascade={CascadeType.MERGE},orphanRemoval=true)
+    @JsonManagedReference
     private List<Activity> activities = new ArrayList<>();
 
 

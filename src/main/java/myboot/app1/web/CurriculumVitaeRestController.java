@@ -1,12 +1,19 @@
 package myboot.app1.web;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.dao.XUserRepository;
 import myboot.app1.model.*;
+import myboot.app1.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +41,8 @@ public class CurriculumVitaeRestController {
     @Autowired
     XUserRepository userRepository;
 
+    @Autowired
+    PersonService personService;
 
     @PostConstruct
     public void init() {
@@ -47,8 +56,8 @@ public class CurriculumVitaeRestController {
         Set<String> roles2 = new HashSet<String>();
         roles1.add("USER");
         roles2.add("USER");
-        XUser xUser1 = new XUser(person1.getEmail(), passwordEncoder.encode(person1.getPassword()), roles1,person1);
-        XUser xUser2 = new XUser(person2.getEmail(), passwordEncoder.encode(person2.getPassword()), roles2,person2);
+        XUser xUser1 = new XUser(person1.getEmail(), passwordEncoder.encode(person1.getPassword()), roles1);
+        XUser xUser2 = new XUser(person2.getEmail(), passwordEncoder.encode(person2.getPassword()), roles2);
         personRepository.saveAll(Arrays.asList(person1, person2, person3));
         userRepository.saveAll(Arrays.asList(xUser1, xUser2));
 
@@ -70,6 +79,9 @@ public class CurriculumVitaeRestController {
         curriculumVitaeRepository.save(cv2);
         CurriculumVitae cv3 = new CurriculumVitae("cv3", person3);
         curriculumVitaeRepository.save(cv3);
+        person1.setCurriculumVitae(cv1);
+        person2.setCurriculumVitae(cv2);
+        personRepository.saveAll(Arrays.asList(person1,person2));
 
 
     }
@@ -98,4 +110,26 @@ public class CurriculumVitaeRestController {
         curriculumVitaeRepository.save(cv);
         return "redirect:/cv/" + cv.getId();
     }
+    @GetMapping("/profileCv")
+
+    public  CurriculumVitae getUserCv(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = "";
+        if (principal instanceof UserDetails) {
+             email = ((UserDetails)principal).getUsername();
+        } else {
+             email = principal.toString();
+        }
+        System.out.println(auth.getName());
+        System.out.println(email +" EEEEEEEEEE");
+        Person person = personService.getPersonByEmail(auth.getName());
+        System.out.println(person.getFirstName());
+        System.out.println(person.getCurriculumVitae().getCvName());
+        CurriculumVitae curriculumVitae = curriculumVitaeRepository.getCurriculumVitaeByPerson(person);
+        //System.out.println(curriculumVitae.getCvName());
+        return curriculumVitae;
+
+    }
+
 }

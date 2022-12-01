@@ -27,9 +27,7 @@ public class JwtUserDetails implements UserDetailsService {
 			throw new UsernameNotFoundException("User '" + username + "' not found");
 		});
 
-		var authorites = user.getRoles().stream().map((role) -> {
-			return new SimpleGrantedAuthority(role);
-		}).toList();
+		var authorites = user.getRoles().stream().map(SimpleGrantedAuthority::new).toList();
 		return org.springframework.security.core.userdetails.User//
 				.withUsername(username)//
 				.password(user.getPassword())//
@@ -39,6 +37,7 @@ public class JwtUserDetails implements UserDetailsService {
 				.credentialsExpired(false)//
 				.disabled(false)//
 				.build();
+
 	}
 
 }

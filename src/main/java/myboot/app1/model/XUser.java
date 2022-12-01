@@ -23,8 +23,6 @@ public class XUser {
     @ElementCollection(fetch = FetchType.EAGER)
     Set<String> roles;
 
-    @OneToOne(targetEntity=Person.class,cascade={CascadeType.MERGE},orphanRemoval=true)
-    Person person;
 
     public XUser(String username, String password) {
         this.username = username;

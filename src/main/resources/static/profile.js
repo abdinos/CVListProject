@@ -8,6 +8,8 @@ const profile = {
             router: null,
             username: null,
             user: {},
+            activities: [],
+            cv: null,
             token: null,
             isLoggedIn: false,
             isLoggedOut: false,
@@ -21,10 +23,20 @@ const profile = {
             baseURL: 'http://localhost:8081/',
             headers: { 'Content-Type': 'application/json' },
         });
-        this.getCurrentUser()
+        this.getCurrentUser();
+        this.getCvActivities();
+        this.getCurrentUserCv();
     },
 
     methods: {
+
+        getCvActivities: function (id){
+            this.axios.get("api/cv/"+id)
+                .then(r => {
+                    console.log("show cv"+id+" done");
+                    this.cv = r.data;
+                });
+            },
         // Place pour les futures méthodes
         getCurrentUser: function (){
             this.username = localStorage.getItem('USERNAME')
@@ -32,6 +44,16 @@ const profile = {
             if (this.username != null){
                 this.isLoggedIn = true
             }
+        },
+        getCurrentUserCv: function (){
+            this.axios.get("api/profileCv")
+                .then(r => {
+                    console.log("show cv done");
+                    this.cv = r.data;
+                    console.log(r.data);
+                });
+
+
         },
         logoutUser: async function(){
             localStorage.removeItem('TOKEN')
