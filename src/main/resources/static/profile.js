@@ -32,12 +32,17 @@ const profile = {
 
     methods: {
 
-        getCvActivities: function (id){
-            this.axios.get("api/cv/"+id)
+        getCvActivities: function (){
+            let token = this.token;
+            this.axios.get("api/profileActivities",{
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
                 .then(r => {
-                    console.log("show cv"+id+" done");
-                    this.cv = r.data;
-                });
+                    console.log("get activities done");
+                    this.activities = r.data}
+                )
             },
         // Place pour les futures méthodes
         getCurrentUser: function (){

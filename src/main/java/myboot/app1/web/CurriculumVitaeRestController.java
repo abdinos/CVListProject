@@ -7,6 +7,7 @@ import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.dao.XUserRepository;
 import myboot.app1.model.*;
+import myboot.app1.service.CurriculumVitaeService;
 import myboot.app1.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
@@ -22,6 +23,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -41,8 +43,8 @@ public class CurriculumVitaeRestController {
     @Autowired
     XUserRepository userRepository;
 
-    @Autowired
-    PersonService personService;
+   @Autowired
+    CurriculumVitaeService curriculumVitaeService;
 
     @PostConstruct
     public void init() {
@@ -113,23 +115,14 @@ public class CurriculumVitaeRestController {
     @GetMapping("/profileCv")
 
     public  CurriculumVitae getUserCv(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email = "";
-        if (principal instanceof UserDetails) {
-             email = ((UserDetails)principal).getUsername();
-        } else {
-             email = principal.toString();
-        }
-        System.out.println(auth.getName());
-        System.out.println(email +" EEEEEEEEEE");
-        Person person = personService.getPersonByEmail(auth.getName());
-        System.out.println(person.getFirstName());
-        System.out.println(person.getCurriculumVitae().getCvName());
-        CurriculumVitae curriculumVitae = curriculumVitaeRepository.getCurriculumVitaeByPerson(person);
-        //System.out.println(curriculumVitae.getCvName());
+        CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
         return curriculumVitae;
 
+    }
+    @GetMapping("/profileActivities")
+    public List<Activity> getUserActivities(){
+        CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
+        return curriculumVitae.getActivities();
     }
 
 }

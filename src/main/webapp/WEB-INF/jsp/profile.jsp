@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><button v-on:click="getCvActivities(1)">Montrer</button></td>
+                    <td><button v-on:click="getCvActivities()">Montrer</button></td>
                 </tr>
             </table>
             <h1>Liste des activities</h1>
@@ -32,7 +32,7 @@
                     <th>Site</th>
                     <th>Annee</th>
                 </tr>
-                <tr v-for="activity in cv.activities">
+                <tr v-for="activity in activities">
                     <td>{{activity.title}}</td>
                     <td>{{activity.description}}</td>
                     <td>{{activity.website}}</td>
