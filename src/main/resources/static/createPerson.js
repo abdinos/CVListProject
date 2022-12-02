@@ -37,6 +37,7 @@ const createPerson = {
                 .then(errors => {
                     console.log("new Person added: ", newPerson);
                     this.errors = errors.data;
+                    location.href= "/profile"
                 });
         },
 

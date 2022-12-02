@@ -8,7 +8,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/cvList">Parcours des CV</a>
             <a class="navbar-brand" href="#" v-on:click="setAddActivity(true)">Edit CV</a>
-            <a class="navbar-brand" href="">Create a person</a>
+            <a class="navbar-brand" href="/createPerson">Create a person</a>
             <button v-on:click="logoutUser()">Logout</button>
 <%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
         </nav>

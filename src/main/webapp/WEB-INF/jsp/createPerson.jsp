@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="form-group">
-    <button class="btn btn-primary mr-2" type="submit">
+    <button class="btn btn-primary mr-2" type="submit" >
       submit</button>
     <div>
       <a class="btn btn-primary btn-sm" href="/profile">annuler</a>
