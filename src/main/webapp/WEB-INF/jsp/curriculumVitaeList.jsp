@@ -13,8 +13,7 @@
 <div id="myApp">
     <div class="container">
         <h1> My CVs</h1>
-        <a class="btn btn-primary btn-sm"
-           href="/create-cv">Creer un nouveau cv</a>
+
         <form action="/result/find" id="searchForm" >
             <button class="btnSearchInput" type="button" ><i class="fas fa-search"></i></button>
             <input  class="searchInput" type="search" placeholder="Rechercher..." aria-label="Search" name="name">

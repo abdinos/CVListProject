@@ -9,6 +9,7 @@ const myApp = {
             cv: null,
             axios: null,
             router: null,
+
         }
     },
 
@@ -20,6 +21,7 @@ const myApp = {
             timeout: 1000,
             headers: { 'Content-Type': 'application/json' },
         });
+
         this.getActivities();
         this.getCvList();
         this.getCvActivities();
@@ -59,7 +61,8 @@ const myApp = {
                     this.getCvList()
                     //this.cvList.add(r.data)
                 })
-        }
+        },
+
 
     }
 }

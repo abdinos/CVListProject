@@ -17,14 +17,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -45,6 +44,9 @@ public class CurriculumVitaeRestController {
 
    @Autowired
     CurriculumVitaeService curriculumVitaeService;
+
+    @Autowired
+    LocalValidatorFactoryBean validationFactory;
 
     @PostConstruct
     public void init() {
@@ -79,8 +81,6 @@ public class CurriculumVitaeRestController {
         cv2.getActivities().add(activity3);
         cv2.getActivities().add(activity4);
         curriculumVitaeRepository.save(cv2);
-        CurriculumVitae cv3 = new CurriculumVitae("cv3", person3);
-        curriculumVitaeRepository.save(cv3);
         person1.setCurriculumVitae(cv1);
         person2.setCurriculumVitae(cv2);
         personRepository.saveAll(Arrays.asList(person1,person2));
@@ -113,16 +113,65 @@ public class CurriculumVitaeRestController {
         return "redirect:/cv/" + cv.getId();
     }
     @GetMapping("/profileCv")
-
     public  CurriculumVitae getUserCv(){
         CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
         return curriculumVitae;
 
+    }
+
+    public Set<ConstraintViolation<Activity>> validate(Activity cv) {
+
+        Set<ConstraintViolation<Activity>> violations = validationFactory.getValidator().validate(cv);
+        return violations;
+    }
+
+    @PostMapping("/profileActivities")
+    public Map<String, String> postActivity(@RequestBody Activity m) {
+        CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
+        curriculumVitae.getActivities().add(m);
+        curriculumVitaeRepository.save(curriculumVitae);
+        Set<ConstraintViolation<Activity>> violations = validate(m);
+        if (violations.isEmpty()) {
+            activityRepository.save(m);
+        }
+
+        Map<String, String> errors = new HashMap<>();
+        violations.forEach((violation) -> {
+            String fieldName = violation.getPropertyPath().toString();
+            String errorMessage = violation.getMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        return errors;
+    }
+    @PutMapping ("/profileCv/{id}")
+    public  Map<String, String> updateUserCv(@RequestBody Activity activity, @PathVariable int id){
+
+// validating user movie
+        Set<ConstraintViolation<Activity>> violations = validate(activity);
+        if (violations.isEmpty()) {
+            Optional<Activity> a = activityRepository.findById(id);
+            if (a.isPresent()) {
+                activityRepository.save(activity);
+            } else {
+                throw new NoSuchElementException("no cv");
+            }
+        }
+
+        Map<String, String> errors = new HashMap<>();
+        violations.forEach((violation) -> {
+            String fieldName = violation.getPropertyPath().toString();
+            String errorMessage = violation.getMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        return errors;
     }
     @GetMapping("/profileActivities")
     public List<Activity> getUserActivities(){
         CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
         return curriculumVitae.getActivities();
     }
+
 
 }

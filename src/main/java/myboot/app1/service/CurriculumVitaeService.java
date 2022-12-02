@@ -39,7 +39,6 @@ public class CurriculumVitaeService {
 
     }
     public CurriculumVitae getCurrentUserCv(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = "";
         if (principal instanceof UserDetails) {
@@ -47,11 +46,7 @@ public class CurriculumVitaeService {
         } else {
             email = principal.toString();
         }
-        System.out.println(auth.getName());
-        System.out.println(email +" EEEEEEEEEE");
-        Person person = personService.getPersonByEmail(auth.getName());
-        System.out.println(person.getFirstName());
-        System.out.println(person.getCurriculumVitae().getCvName());
+        Person person = personService.getPersonByEmail(email);
         CurriculumVitae curriculumVitae = curriculumVitaeRepository.getCurriculumVitaeByPerson(person);
         return curriculumVitae;
     }

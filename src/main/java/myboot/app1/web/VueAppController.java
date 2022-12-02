@@ -34,6 +34,13 @@ public class VueAppController {
         return res;
     }
 
+    @RequestMapping(value = "/edit")
+    //@PreAuthorize("hasAuthority('USER')")
+    private ModelAndView editCV() {
+        var res = new ModelAndView("edit-cv");
+        return res;
+    }
+
     @RequestMapping(value = "/activities")
     private ModelAndView activities() {
         var res = new ModelAndView("activities");

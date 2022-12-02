@@ -13,6 +13,10 @@ const profile = {
             token: localStorage.getItem('TOKEN'),
             isLoggedIn: false,
             isLoggedOut: false,
+            editable: null,
+            errors: [],
+            isAddActivity: false,
+            newActivity: null,
 
         }
     },
@@ -43,7 +47,7 @@ const profile = {
                     console.log("get activities done");
                     this.activities = r.data}
                 )
-            },
+        },
         // Place pour les futures méthodes
         getCurrentUser: function (){
             this.username = localStorage.getItem('USERNAME')
@@ -76,6 +80,48 @@ const profile = {
             console.log(this.isLoggedOut)
 
         },
+        editCV: async function(cv) {
+            console.log("CV with id " + cv.id + " is set to be modified");
+            this.editable = cv;
+        },
+        submitCV: function(cv) {
+            let token = this.token;
+            this.axios.put('api/profileCv/' + cv.id, cv, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
+                .then(errors => {
+                    this.errors = errors.data;
+                    this.getCvActivities();
+                    this.getCurrentUserCv();
+                });
+        },
+        clearEditable: function() {
+            this.editable = null;
+        },
+        addActivity: function(newActivity) {
+            let token = this.token
+            console.log('add activity btn')
+            this.axios.post('api/profileActivities', newActivity, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
+                .then(errors => {
+                    console.log("new activity added: ", newActivity);
+                    this.errors = errors.data;
+                    console.log('errrrrrr =>', this.errors)
+                    this.getCvActivities();
+                    this.getCurrentUserCv();
+                    console.log('aprés err')
+                });
+        },
+        setAddActivity: function(status) {
+            this.isAddActivity = status;
+            this.newActivity = {};
+        },
+
 
 
     },
