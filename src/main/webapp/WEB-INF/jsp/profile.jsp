@@ -6,8 +6,9 @@
 <div id="profile">
     <div class="container" v-if="(isLoggedIn)">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/cvList">Parcours CV</a>
             <a class="navbar-brand" href="">Edit CV</a>
-            <a class="navbar-brand" href="">Create a person</a>
+            <a class="navbar-brand" href="/createPerson" v-on:click="setAddPerson(true)">Create a person</a>
             <button v-on:click="logoutUser()">Logout</button>
 <%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
         </nav>
@@ -51,5 +52,6 @@
 
 </div>
 <script src="${profile}"></script>
+
 
 <%@ include file="/WEB-INF/jsp/footer.jsp"%>

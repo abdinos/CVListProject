@@ -77,6 +77,14 @@ const profile = {
 
         },
 
+        addMovie: function(newMovie) {
+            this.axios.post('api/movies/', newMovie)
+                .then(errors => {
+                    console.log("new movie added: ", newMovie);
+                    this.errors = errors.data;;
+                });
+        },
+
 
     },
 }

@@ -1,7 +1,9 @@
 package myboot.app1.web;
 
 
+import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
+import myboot.app1.model.CurriculumVitae;
 import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +21,10 @@ public class PersonRestController {
 
     @Autowired
     PersonRepository personRepository;
+    @Autowired
+    CurriculumVitaeRepository curriculumVitaeRepository;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("Start " + this);
-        if (personRepository.count() == 0) {
-            personRepository.save(new Person("Abdessattar","Despair","2024","","","",""));
-            personRepository.save(new Person("Yanis","Arsenic","2024","","","",""));
-        }
-    }
+
 
 
     @GetMapping(value = "/persons")
@@ -42,15 +39,16 @@ public class PersonRestController {
 
     @DeleteMapping("/persons/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteMovie(@PathVariable long id) {
+    void deletePerson(@PathVariable long id) {
         personRepository.deleteById(id);
     }
 
     @PostMapping("/persons")
-    public Person postMovie(@RequestBody @Valid Person m) {
-        personRepository.save(m);
-        return m;
+    public Person postPerson(@RequestBody Person p) {
+        personRepository.save(p);
+        return p;
     }
+
 
 
 

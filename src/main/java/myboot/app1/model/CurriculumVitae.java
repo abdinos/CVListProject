@@ -23,7 +23,7 @@ public class CurriculumVitae {
 
     @OneToOne(targetEntity=Person.class,cascade={CascadeType.MERGE},orphanRemoval=true)
     @JoinColumn(name="person_id")
-     @JsonBackReference
+     @JsonManagedReference
     Person person;
 
     @OneToMany(targetEntity=Activity.class,cascade={CascadeType.MERGE},orphanRemoval=true)
