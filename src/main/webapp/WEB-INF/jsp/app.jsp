@@ -16,9 +16,14 @@
             <a class="btn btn-outline-light" href="/cvList">Resumes</a>
             <a class="btn btn-outline-success" href="/login">Sign In</a>
         </nav>
-    </div>
-    <div class="container">
-        <h3>CV Manager</h3>
+    </div><br>
+
+    <div class="d-flex justify-content-center">
+        <div>
+            <h3 style="align-content: center">Welcome to our CV Manager</h3>
+            <img src="image.png" alt="image">
+
+        </div>
     </div>
 </div>
 <script src="${app}"></script>
