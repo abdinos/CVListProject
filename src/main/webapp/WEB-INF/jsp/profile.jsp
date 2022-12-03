@@ -8,11 +8,12 @@
         <nav class="navbar navbar-dark bg-dark">
             <p style="color: white"><i class="fas fa-user" style="width: 25px; height: 25px; color: white"></i>{{username}}</p>
 
-            <div class="d-flex justify-content-md-center ">
+            <div class="d-flex justify-content-md-center">
                 <a class="btn btn-outline-light" href="/cvList">Resumes</a>
                 <a class="btn btn-outline-warning" href="#" v-on:click="setAddActivity(true)">Edit CV</a>
                 <a class="btn btn-outline-success" href="/createPerson">Create a person</a>
                 <a class="btn btn-outline-info" href="#" v-on:click="setShowUserInfo(true)">Show user info</a>
+
             </div>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-outline-danger" v-on:click="logoutUser()">Logout</button>
@@ -25,9 +26,9 @@
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>BirthDate</th>
-                    <th>Address</th>
                     <th>Email</th>
+                    <th>Address</th>
+                    <th>BirthDate</th>
                     <th>Website</th>
                     <th>Action</th>
                 </tr>
@@ -48,7 +49,6 @@
             <table class="table">
                 <tr>
                     <th>{{cv.cvName}}</th>
-                    <th>voir CV </th>
                 </tr>
             </table>
             <h3>Liste des activities</h3>
@@ -142,14 +142,22 @@
                         {{errors.description}}
                     </div>
                 </div>
-                <div class="form-group">
-<%--                    <label>Nature :</label>--%>
-                    <input placeholder="Nature (en Maj)" v-model="newActivity.nature" class="form-control" name="nature"
-                           v-bind:class="{'is-invalid':errors.nature}"  />
-                    <div v-if="(errors.nature)" class="alert alert-warning">
-                        {{errors.nature}}
-                    </div>
-                </div>
+<%--&lt;%&ndash;                    <label>Nature :</label>&ndash;%&gt;--%>
+<%--                    <input placeholder="Nature (en Maj)" v-model="newActivity.nature" class="form-control" name="nature"--%>
+<%--                           v-bind:class="{'is-invalid':errors.nature}"  />--%>
+<%--                    <div v-if="(errors.nature)" class="alert alert-warning">--%>
+<%--                        {{errors.nature}}--%>
+<%--                    </div>--%>
+
+                <select  v-model="newActivity.nature"   class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>select the nature</option>
+                    <option  value="EXPERIENCE">EXPERIENCE</option>
+                    <option  value="FORMATION">FORMATION</option>
+                    <option  value="PROJET">PROJET</option>
+                    <option  value="AUTRE">AUTRE</option>
+                </select>
+
+
                 <div class="form-group">
 <%--                    <label>website :</label>--%>
                     <input placeholder="Website" v-model="newActivity.website" class="form-control" name="website"

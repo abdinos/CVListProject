@@ -16,8 +16,9 @@
             <a class="btn btn-outline-light" href="/cvList">Resumes</a>
             <a class="btn btn-outline-success" href="/login">Sign In</a>
         </nav>
-        <h1>My application </h1>
-
+    </div>
+    <div class="container">
+        <h3>CV Manager</h3>
     </div>
 </div>
 <script src="${app}"></script>
