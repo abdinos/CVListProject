@@ -12,66 +12,84 @@
 <div id="createPerson">
 <form id="add-person" method="post" novalidate="true" @submit.prevent="addPerson(newUser)">
   <h1 class="mt-4">Add New Person</h1>
-  <div class="form-group">
-    <label>Firstname :</label>
-    <input v-model="newUser.firstName" class="form-control" name="firstName"
-           v-bind:class="{'is-invalid':errors.firstname}"  required/>
-    <div v-if="(errors.firstName)" class="alert alert-warning">
-      {{errors.firstName}}
+    <br>
+    <div class="row">
+    <div class="col">
+<%--      <label>Firstname :</label>--%>
+      <input placeholder="First name" v-model="newUser.firstName" class="form-control" name="firstName"
+             v-bind:class="{'is-invalid':errors.firstname}"  required/>
+      <div v-if="(errors.firstName)" class="alert alert-warning">
+        {{errors.firstName}}
+      </div>
+    </div>
+    <div class="col">
+<%--      <label>Lastname :</label>--%>
+      <input placeholder="Last name" v-model="newUser.lastName" class="form-control" name="lastName"
+             v-bind:class="{'is-invalid':errors.lastName}" required />
+      <div v-if="(errors.lastName)" class="alert alert-warning">
+        {{errors.lastName}}
+      </div>
     </div>
   </div>
-  <div class="form-group">
-    <label>Lastname :</label>
-    <input v-model="newUser.lastName" class="form-control" name="lastName"
-           v-bind:class="{'is-invalid':errors.lastName}" required />
-    <div v-if="(errors.lastName)" class="alert alert-warning">
-      {{errors.lastName}}
-    </div>
+    <br>
+
+    <div class="row">
+      <div class="col">
+<%--        <label>Birthdate :</label>--%>
+        <input placeholder="Birthdate" v-model="newUser.birthDate" class="form-control" name="birthDate"
+               v-bind:class="{'is-invalid':errors.birthDate}" number required />
+        <div v-if="(errors.birthDate)" class="alert alert-warning">
+          {{errors.birthDate}}
+        </div>
+      </div>
+      <div class="col">
+<%--        <label> Adress :</label>--%>
+        <input placeholder="Address" v-model="newUser.adress" class="form-control" name="adress"
+               v-bind:class="{'is-invalid':errors.adress}" number required/>
+        <div v-if="(errors.adress)" class="alert alert-warning">
+          {{errors.adress}}
+        </div>
+       </div>
   </div>
-  <div class="form-group">
-    <label>Birthdate :</label>
-    <input v-model="newUser.birthDate" class="form-control" name="birthDate"
-           v-bind:class="{'is-invalid':errors.birthDate}" number required />
-    <div v-if="(errors.birthDate)" class="alert alert-warning">
-      {{errors.birthDate}}
+    <br>
+
+    <div class="row">
+    <div class="col">
+      <%--        <label>Email adress :</label>--%>
+      <input placeholder="Email adress" v-model="newUser.email" class="form-control" name="email"
+             v-bind:class="{'is-invalid':errors.email}" number required/>
+      <div v-if="(errors.email)" class="alert alert-warning">
+        {{errors.email}}
+      </div>
     </div>
+    <div class="col">
+<%--      <label>Website :</label>--%>
+      <input placeholder="Website" v-model="newUser.website" class="form-control" name="website"
+             v-bind:class="{'is-invalid':errors.website}" number required/>
+      <div v-if="(errors.website)" class="alert alert-warning">
+        {{errors.website}}
+      </div>
+    </div>
+
   </div>
-  <div class="form-group">
-    <label> Adress :</label>
-    <input v-model="newUser.adress" class="form-control" name="adress"
-           v-bind:class="{'is-invalid':errors.adress}" number required/>
-    <div v-if="(errors.adress)" class="alert alert-warning">
-      {{errors.adress}}
-    </div>
-    <label>Email adress :</label>
-    <input v-model="newUser.email" class="form-control" name="email"
-           v-bind:class="{'is-invalid':errors.email}" number required/>
-    <div v-if="(errors.email)" class="alert alert-warning">
-      {{errors.email}}
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Website :</label>
-    <input v-model="newUser.website" class="form-control" name="website"
-           v-bind:class="{'is-invalid':errors.website}" number required/>
-    <div v-if="(errors.website)" class="alert alert-warning">
-      {{errors.website}}
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Password :</label>
-    <input v-model="newUser.password" class="form-control" name="password"
-           v-bind:class="{'is-invalid':errors.password}" number required/>
-    <div v-if="(errors.password)" class="alert alert-warning">
-      {{errors.password}}
-    </div>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-primary mr-2" type="submit" >
-      submit</button>
-    <div>
-      <a class="btn btn-primary btn-sm" href="/profile">annuler</a>
-    </div>
+    <br>
+  <div class="row">
+      <div class="col">
+          <%--      <label>Password :</label>--%>
+          <input placeholder="Password" v-model="newUser.password" class="form-control" name="password"
+                 v-bind:class="{'is-invalid':errors.password}" number required/>
+          <div v-if="(errors.password)" class="alert alert-warning">
+              {{errors.password}}
+          </div>
+      </div>
+      <div class="col">
+          <div>
+            <button class="btn btn-outline-primary mr-3" type="submit" >
+              Save</button>
+
+              <a class="btn btn-outline-danger mr-3" href="/profile">Cancel</a>
+          </div>
+      </div>
   </div>
 </form>
 </div>

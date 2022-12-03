@@ -17,6 +17,8 @@ const profile = {
             errors: [],
             isAddActivity: false,
             newActivity: null,
+            userInfo: [],
+            showInfo: false,
 
         }
     },
@@ -32,6 +34,7 @@ const profile = {
         this.getCurrentUser();
         this.getCvActivities();
         this.getCurrentUserCv();
+        this.getCurrentUserInfo();
     },
 
     methods: {
@@ -55,6 +58,21 @@ const profile = {
             if (this.username != null){
                 this.isLoggedIn = true
             }
+        },
+        getCurrentUserInfo: function (){
+            let token = this.token;
+            this.axios.get("api/userInfo",{
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
+                .then(r => {
+                    console.log("get activities done");
+                    this.userInfo = r.data}
+                )
+        },
+        setShowUserInfo: function(status) {
+            this.showInfo = status;
         },
         getCurrentUserCv: function (){
             let token = this.token;
@@ -111,10 +129,8 @@ const profile = {
                 .then(errors => {
                     console.log("new activity added: ", newActivity);
                     this.errors = errors.data;
-                    console.log('errrrrrr =>', this.errors)
                     this.getCvActivities();
                     this.getCurrentUserCv();
-                    console.log('aprés err')
                 });
         },
         setAddActivity: function(status) {

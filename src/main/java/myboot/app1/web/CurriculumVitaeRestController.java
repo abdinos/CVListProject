@@ -173,5 +173,12 @@ public class CurriculumVitaeRestController {
         return curriculumVitae.getActivities();
     }
 
+    @GetMapping("/userInfo")
+    public List<String> getUserInfo(){
+        CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
+        Person cuurentPerson = curriculumVitae.getPerson();
+        return Arrays.asList(cuurentPerson.getFirstName(), cuurentPerson.getLastName(), cuurentPerson.getEmail(), cuurentPerson.getAdress(), cuurentPerson.getBirthDate(), cuurentPerson.getWebsite());
+    }
+
 
 }
