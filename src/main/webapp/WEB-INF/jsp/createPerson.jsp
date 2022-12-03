@@ -10,6 +10,15 @@
 <c:url var="createPerson" value="/createPerson.js" />
 <c:url var="show-person" value="/api/persons/" />
 <div id="createPerson">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="d-flex justify-content-start">
+            <a class="btn btn-outline-light" href="/profile">Profile</a>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-danger" v-on:click="logoutUser()">Logout</button>
+        </div>
+        <%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
+    </nav><br>
 <form id="add-person" method="post" novalidate="true" @submit.prevent="addPerson(newUser)">
   <h1 class="mt-4">Add New Person</h1>
     <br>

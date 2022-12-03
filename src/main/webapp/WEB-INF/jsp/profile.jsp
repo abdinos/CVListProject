@@ -4,19 +4,22 @@
 <c:url var="profile" value="/profile.js" />
 
 <div id="profile">
-    <div class="container" v-if="(isLoggedIn)">
+    <div v-if="(isLoggedIn)">
         <nav class="navbar navbar-dark bg-dark">
-            <a class="btn btn-outline-light" href="/cvList">Parcours des CV</a>
-            <a class="btn btn-outline-warning" href="#" v-on:click="setAddActivity(true)">Edit CV</a>
-            <a class="btn btn-outline-success" href="/createPerson">Create a person</a>
-            <a class="btn btn-outline-info" href="#" v-on:click="setShowUserInfo(true)">Show user info</a>
-            <button class="btn btn-outline-danger" v-on:click="logoutUser()">Logout</button>
-<%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
-        </nav>
+            <p style="color: white"><i class="fas fa-user" style="width: 25px; height: 25px; color: white"></i>{{username}}</p>
 
-        <h3>{{username}}</h3>
-
-        <div v-if="(showInfo)">
+            <div class="d-flex justify-content-md-center ">
+                <a class="btn btn-outline-light" href="/cvList">Resumes</a>
+                <a class="btn btn-outline-warning" href="#" v-on:click="setAddActivity(true)">Edit CV</a>
+                <a class="btn btn-outline-success" href="/createPerson">Create a person</a>
+                <a class="btn btn-outline-info" href="#" v-on:click="setShowUserInfo(true)">Show user info</a>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-outline-danger" v-on:click="logoutUser()">Logout</button>
+            </div>
+            <%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
+        </nav><br>
+        <div class="container" v-if="(showInfo)">
             <h3>User Info</h3>
             <table class="table">
                 <tr>
@@ -26,6 +29,7 @@
                     <th>Address</th>
                     <th>Email</th>
                     <th>Website</th>
+                    <th>Action</th>
                 </tr>
                 <tr>
                     <td>{{userInfo[0]}}</td>
@@ -34,12 +38,12 @@
                     <td>{{userInfo[3]}}</td>
                     <td>{{userInfo[4]}}</td>
                     <td>{{userInfo[5]}}</td>
+                    <td><button v-on:click="setShowUserInfo(false)" class="btn btn-outline-primary">
+                            Close</button></td>
                 </tr>
             </table>
-            <button v-on:click="setShowUserInfo(false)" class="btn btn-outline-primary">
-                Close</button>
         </div>
-        <div v-if="(cv != null)">
+        <div class="container" v-if="(cv != null)">
             <h3>CV</h3>
             <table class="table">
                 <tr>
@@ -173,9 +177,20 @@
         </div>
 
     </div>
-    <div class="container" v-if="(!isLoggedIn)">
-        <h3>You're not authenticated, please sign in</h3><br>
-        <a class="btn btn-primary btn-sm" href="/login">Sign in</a>
+    <div v-if="(!isLoggedIn)">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="d-flex justify-content-md-center ">
+                <a class="btn btn-outline-light" href="/cvList">Resumes</a>
+            </div>
+            <%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
+        </nav><br>
+        <div class="container">
+            <div class="col">
+                <h3>You're not authenticated, please sign in</h3>
+                <a class="btn btn-outline-primary btn-lg" href="/login">Sign in</a>
+            </div>
+        </div>
+
     </div>
 
 

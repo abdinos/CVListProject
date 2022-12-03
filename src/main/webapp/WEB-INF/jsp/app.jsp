@@ -11,11 +11,10 @@
 <c:url var="app" value="/app.js" />
 
 <div id="myApp">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/cvList">Parcours des CV</a>
-            <a class="navbar-brand" href="/login">Connexion</a>
-
+    <div >
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="btn btn-outline-light" href="/cvList">Resumes</a>
+            <a class="btn btn-outline-success" href="/login">Sign In</a>
         </nav>
         <h1>My application </h1>
 

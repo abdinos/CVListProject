@@ -11,24 +11,34 @@
 <c:url var="login" value="/login.js" />
 
 <div id="login">
-    <main class="form-signin w-100 m-auto">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="btn btn-outline-light" href="/app">home</a>
+        <a class="btn btn-outline-success" href="/login">Sign In</a>
+    </nav>
+    <br>
+    <div class="d-flex justify-content-center" >
         <form method="post" @submit.prevent="authUser(user)">
-            <h1 class="h3 mb-3 fw-normal">Please sign in XXXXXXXXXX</h1>
-            <div class="form-floating">
-<%--                <label for="floatingInput">Username</label>--%>
-                <input type="text" class="form-control" id="floatingInput" placeholder="Username" v-model="user.username"  name="username" required>
+            <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+            <div class="form-group row">
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Username" v-model="user.username"  name="username" required>
+                </div>
             </div>
-            <div class="form-floating">
-<%--                <label for="floatingPassword">Password</label>--%>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="user.password" name="password" required>
+            <div class="form-group row">
+                <div class="col-xs-4">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="user.password" name="password" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+
         </form>
         <div v-if="(isLoggedIn)">
             <h3>User Authenticated</h3>
         </div>
-    </main>
+    </div>
 
 
 </div>
