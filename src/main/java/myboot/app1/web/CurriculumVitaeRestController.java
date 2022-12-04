@@ -1,27 +1,18 @@
 package myboot.app1.web;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.dao.XUserRepository;
-import myboot.app1.model.*;
+import myboot.app1.model.Activity;
+import myboot.app1.model.CurriculumVitae;
+import myboot.app1.model.Person;
 import myboot.app1.service.CurriculumVitaeService;
-import myboot.app1.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import java.util.*;
@@ -49,45 +40,6 @@ public class CurriculumVitaeRestController {
     @Autowired
     LocalValidatorFactoryBean validationFactory;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("Start " + this);
-
-
-        Person person1 = new Person("yanis", "amer", "", "", "aaa", "", "aaa");
-        Person person2 = new Person("abdessettar", "ould", "", "", "bbb", "", "bbb");
-        Person person3 = new Person("XXX", "YYY", "", "", "", "", "");
-        Set<String> roles1 = new HashSet<String>();
-        Set<String> roles2 = new HashSet<String>();
-        roles1.add("USER");
-        roles2.add("USER");
-        XUser xUser1 = new XUser(person1.getEmail(), passwordEncoder.encode(person1.getPassword()), roles1);
-        XUser xUser2 = new XUser(person2.getEmail(), passwordEncoder.encode(person2.getPassword()), roles2);
-        personRepository.saveAll(Arrays.asList(person1, person2, person3));
-        userRepository.saveAll(Arrays.asList(xUser1, xUser2));
-
-
-        Activity activity1 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IDL", "cv.com");
-        Activity activity2 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - SID", "cv.com");
-        Activity activity3 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IAAA", "cv.com");
-        Activity activity4 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - IMD", "cv.com");
-        Activity activity5 = new Activity(2022, ActivityNature.FORMATION, "M2-info", "formation : M2 - GIG", "cv.com");
-        activityRepository.saveAll(Arrays.asList(activity1, activity2, activity3, activity4, activity5));
-        CurriculumVitae cv1 = new CurriculumVitae("cv1", person1);
-        cv1.getActivities().add(activity1);
-        cv1.getActivities().add(activity2);
-        curriculumVitaeRepository.save(cv1);
-        CurriculumVitae cv2 = new CurriculumVitae("cv2", person2);
-        cv2.getActivities().add(activity5);
-        cv2.getActivities().add(activity3);
-        cv2.getActivities().add(activity4);
-        curriculumVitaeRepository.save(cv2);
-        person1.setCurriculumVitae(cv1);
-        person2.setCurriculumVitae(cv2);
-        personRepository.saveAll(Arrays.asList(person1,person2));
-
-
-    }
 
 
     @GetMapping("/cvList")
@@ -97,8 +49,7 @@ public class CurriculumVitaeRestController {
 
     @GetMapping("/cv/{id}")
     public CurriculumVitae getCurriculumVitae(@PathVariable int id) {
-        CurriculumVitae cv = curriculumVitaeRepository.findById(id).orElseThrow();
-        return cv;
+        return curriculumVitaeRepository.findById(id).orElseThrow();
     }
 
 
@@ -115,19 +66,17 @@ public class CurriculumVitaeRestController {
     }
     @GetMapping("/profileCv")
     public  CurriculumVitae getUserCv(){
-        CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
-        return curriculumVitae;
+        return curriculumVitaeService.getCurrentUserCv();
 
     }
 
     public Set<ConstraintViolation<Activity>> validate(Activity cv) {
 
-        Set<ConstraintViolation<Activity>> violations = validationFactory.getValidator().validate(cv);
-        return violations;
+        return validationFactory.getValidator().validate(cv);
     }
 
     @PostMapping("/profileActivities")
-    public Map<String, String> postActivity(@RequestBody Activity m) {
+    public Map<String, String> postActivity(@RequestBody @Valid Activity m) {
         CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
         curriculumVitae.getActivities().add(m);
         curriculumVitaeRepository.save(curriculumVitae);
@@ -177,9 +126,9 @@ public class CurriculumVitaeRestController {
     @GetMapping("/userInfo")
     public List<String> getUserInfo(){
         CurriculumVitae curriculumVitae = curriculumVitaeService.getCurrentUserCv();
-        Person cuurentPerson = curriculumVitae.getPerson();
-        return Arrays.asList(cuurentPerson.getFirstName(), cuurentPerson.getLastName(), cuurentPerson.getEmail(), cuurentPerson.getAdress(),
-                cuurentPerson.getBirthDate(), cuurentPerson.getWebsite());
+        Person curentPerson = curriculumVitae.getPerson();
+        return Arrays.asList(curentPerson.getFirstName(), curentPerson.getLastName(), curentPerson.getEmail(), curentPerson.getAdress(),
+                curentPerson.getBirthDate(), curentPerson.getWebsite());
     }
 
 

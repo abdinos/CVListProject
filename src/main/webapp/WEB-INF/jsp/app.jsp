@@ -11,7 +11,7 @@
 <c:url var="app" value="/app.js" />
 
 <div id="myApp">
-    <div >
+    <div class="bg-image" style="background-image: url('https://wallpaper.dog/large/20555764.jpg') ;background-position: center;background-repeat: no-repeat;">
         <nav class="navbar navbar-dark bg-dark">
             <a class="btn btn-outline-light" href="/cvList">Resumes</a>
             <a class="btn btn-outline-success" href="/login">Sign In</a>
