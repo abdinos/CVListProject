@@ -34,6 +34,7 @@
             <c:forEach items="${personResult}" var="person">
                 <tr>
                     <td> <c:out value="${person.firstName}" /> </td>
+                    <td> <c:out value="${person.lastName}" /> </td>
                     <td><button v-on:click="getCvActivities(${person.curriculumVitae.id})">Montrer</button></td>
                 </tr>
             </c:forEach>

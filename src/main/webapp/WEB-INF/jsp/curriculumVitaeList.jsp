@@ -43,7 +43,7 @@
             </tr>
             <tr v-for="cv in cvList">
                 <td>{{cv.cvName}}</td>
-                <td>{{cv.person.firstName}}</td>
+                <td>{{cv.person.firstName}} {{cv.person.lastName}}</td>
                 <td><button v-on:click="getCvActivities(cv.id)">Montrer</button></td>
             </tr>
         </table>

@@ -68,22 +68,19 @@ public class VueAppController {
     @RequestMapping(value = "/result/find")
     private ModelAndView searchCV(@RequestParam("name")String name) {
         var cvs = curriculumVitaeRepository.getCurriculumVitaeByName(name);
-        var firstName = personRepository.getPersonByFirstName("%"+name+"%");
-        var lastName = personRepository.getPersonByLastName("%"+name+"%");
+        var fullName = personRepository.getPersonByFirstName("%" + name + "%");
+        fullName.addAll(personRepository.getPersonByLastName("%" + name + "%"));
         ModelAndView modelAndView = null;
-        if(!cvs.isEmpty()){
+        if (!cvs.isEmpty()) {
             modelAndView = new ModelAndView("resultSearch", "cvResult", cvs);
 
         }
-        if(!firstName.isEmpty()){
-            modelAndView = new ModelAndView("resultSearch", "personResult", firstName);
-        }
-        if(!lastName.isEmpty()){
-            modelAndView = new ModelAndView("resultSearch", "personResult", lastName);
-        }
+        if (!fullName.isEmpty()) {
+            modelAndView = new ModelAndView("resultSearch", "personResult", fullName);
+            return modelAndView;
 
+        }
         return modelAndView;
-
     }
     @RequestMapping(value = "/createPerson")
     private ModelAndView createPerson() {

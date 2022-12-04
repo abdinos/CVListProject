@@ -4,15 +4,14 @@ import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.dao.XUserRepository;
-import myboot.app1.model.Activity;
-import myboot.app1.model.CurriculumVitae;
-import myboot.app1.model.Person;
+import myboot.app1.model.*;
 import myboot.app1.service.CurriculumVitaeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import java.util.*;
@@ -39,6 +38,7 @@ public class CurriculumVitaeRestController {
 
     @Autowired
     LocalValidatorFactoryBean validationFactory;
+
 
 
 
