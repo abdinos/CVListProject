@@ -15,18 +15,26 @@
         <div class="d-flex justify-content-start">
             <a class="btn btn-outline-light" href="/app">home</a>
         </div>
+        <div class="d-flex justify-content-center">
+            <div class="input-group">
+                <form action="/result/find" id="searchForm" >
+<%--                    <button class="btnSearchInput" type="button"><i class="fas fa-search"></i></button>--%>
+                    <input  class="form-control" type="search" placeholder="Rechercher..." aria-label="Search" name="name">
+                </form>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+        </div>
         <div class="d-flex justify-content-end">
             <a class="btn btn-outline-light" href="/profile">Profile</a>
         </div>
         <%--            <a class="navbar-brand" href="/logout">Logout</a>--%>
     </nav><br>
     <div class="container">
+        <h3>List of Curriculum Vitae</h3>
 
-        <form action="/result/find" id="searchForm" >
-            <h1> List of CVs</h1>
-            <button class="btnSearchInput" type="button" ><i class="fas fa-search"></i></button>
-            <input  class="searchInput" type="search" placeholder="Rechercher..." aria-label="Search" name="name">
-        </form>
         <table class="table">
             <tr>
                 <th>CV</th>

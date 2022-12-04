@@ -21,8 +21,15 @@
     <div class="d-flex justify-content-center">
         <div>
             <h3 style="align-content: center">Welcome to our CV Manager</h3>
-            <img src="image.png" alt="image">
-
+            <div class="input-group">
+                <form action="/result/find" id="searchForm" >
+                    <%--                    <button class="btnSearchInput" type="button"><i class="fas fa-search"></i></button>--%>
+                    <input  class="form-control" type="search" placeholder="Rechercher..." aria-label="Search" name="name">
+                </form>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>

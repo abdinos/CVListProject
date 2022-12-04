@@ -1,17 +1,25 @@
 package myboot.app1.web;
 
 import myboot.app1.dao.CurriculumVitaeRepository;
+import myboot.app1.dao.PersonRepository;
+import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller()
 public class VueAppController {
 
     @Autowired
     CurriculumVitaeRepository curriculumVitaeRepository;
+
+    @Autowired
+    PersonRepository personRepository;
 
     @RequestMapping(value = "/app")
     private ModelAndView hello() {
@@ -58,10 +66,23 @@ public class VueAppController {
     }
 
     @RequestMapping(value = "/result/find")
-    private ModelAndView search(@RequestParam("name")String name) {
-        var result = curriculumVitaeRepository.getCurriculumVitaeByName(name);
-        var res = new ModelAndView("resultCvSearch", "cvResult", result);
-        return res;
+    private ModelAndView searchCV(@RequestParam("name")String name) {
+        var cvs = curriculumVitaeRepository.getCurriculumVitaeByName(name);
+        var firstName = personRepository.getPersonByFirstName("%"+name+"%");
+        var lastName = personRepository.getPersonByLastName("%"+name+"%");
+        ModelAndView modelAndView = null;
+        if(!cvs.isEmpty()){
+            modelAndView = new ModelAndView("resultSearch", "cvResult", cvs);
+
+        }
+        if(!firstName.isEmpty()){
+            modelAndView = new ModelAndView("resultSearch", "personResult", firstName);
+        }
+        if(!lastName.isEmpty()){
+            modelAndView = new ModelAndView("resultSearch", "personResult", lastName);
+        }
+
+        return modelAndView;
 
     }
     @RequestMapping(value = "/createPerson")

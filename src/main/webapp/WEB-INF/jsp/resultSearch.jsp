@@ -22,15 +22,7 @@
     </nav><br>
     <div class="container">
         <h1> Search Result</h1>
-        <form action="/result/find" id="searchForm" >
-            <button class="btnSearchInput" type="button"><i class="fas fa-search"></i></button>
-            <input  class="searchInput" type="search" placeholder="Rechercher..." aria-label="Search" name="name">
-        </form>
         <table class="table">
-            <tr>
-                <th>CV</th>
-                <th>voir CV </th>
-            </tr>
             <c:forEach items="${cvResult}" var="cv">
                 <tr>
                     <td> <c:out value="${cv.cvName}" /> </td>
@@ -38,6 +30,15 @@
                 </tr>
             </c:forEach>
         </table>
+        <table class="table">
+            <c:forEach items="${personResult}" var="person">
+                <tr>
+                    <td> <c:out value="${person.firstName}" /> </td>
+                    <td><button v-on:click="getCvActivities(${person.curriculumVitae.id})">Montrer</button></td>
+                </tr>
+            </c:forEach>
+        </table>
+
 
         <div v-if="(cv != null)">
             <h1>CV</h1>

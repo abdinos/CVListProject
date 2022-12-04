@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolation;
@@ -53,8 +54,8 @@ public class CurriculumVitaeRestController {
         System.out.println("Start " + this);
 
 
-        Person person1 = new Person("yanis", "amer", "", "", "aaa@aaa", "", "aaa");
-        Person person2 = new Person("abdessettar", "ould", "", "", "bbb@bbb", "", "bbb");
+        Person person1 = new Person("yanis", "amer", "", "", "aaa", "", "aaa");
+        Person person2 = new Person("abdessettar", "ould", "", "", "bbb", "", "bbb");
         Person person3 = new Person("XXX", "YYY", "", "", "", "", "");
         Set<String> roles1 = new HashSet<String>();
         Set<String> roles2 = new HashSet<String>();
@@ -108,7 +109,7 @@ public class CurriculumVitaeRestController {
     }
 
     @PostMapping("/cv")
-    public String postMovie(@RequestBody @Valid CurriculumVitae cv) {
+    public String postCV(@RequestBody @Valid CurriculumVitae cv) {
         curriculumVitaeRepository.save(cv);
         return "redirect:/cv/" + cv.getId();
     }
@@ -180,6 +181,7 @@ public class CurriculumVitaeRestController {
         return Arrays.asList(cuurentPerson.getFirstName(), cuurentPerson.getLastName(), cuurentPerson.getEmail(), cuurentPerson.getAdress(),
                 cuurentPerson.getBirthDate(), cuurentPerson.getWebsite());
     }
+
 
 
 }
