@@ -75,7 +75,7 @@ public class PopulationService {
                 }
 
                 Person person1 = new Person("Yanis", "Amerouche", "01/01/1931", "Opale", "yanis@gmail", "yanis.com", "yani");
-                Person person2 = new Person("Amerouche", "Ould-Chibani", "07/08/2000", "Canada", "abdessettar@gmail.com", "abdessettar.com", "abdessettar");
+                Person person2 = new Person("Abdessettar", "Ould-Chibani", "07/08/2000", "Canada", "abdessettar@gmail.com", "abdessettar.com", "abdessettar");
                 XUser xUser1 = new XUser(person1.getEmail(), passwordEncoder.encode(person1.getPassword()));
                 XUser xUser2 = new XUser(person2.getEmail(), passwordEncoder.encode(person2.getPassword()));
                 personRepository.saveAll(Arrays.asList(person1, person2));
