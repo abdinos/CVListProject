@@ -35,15 +35,6 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	@PostConstruct
-	public void init() {
-		var encoder = passwordEncoder();
-		//var aa = new XUser("aaa", encoder.encode("aaa"), Set.of("ADMIN", "USER"));
-		//var bb = new XUser("bbb", encoder.encode("bbb"), Set.of("USER"));
-		//userRepo.save(aa);
-		//userRepo.save(bb);
-		logger.debug("--- INIT SPRING SECURITY JWT");
-	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

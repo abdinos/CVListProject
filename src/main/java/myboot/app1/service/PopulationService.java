@@ -1,22 +1,17 @@
 package myboot.app1.service;
 
 import com.github.javafaker.Faker;
-import jdk.dynalink.linker.LinkerServices;
 import myboot.app1.dao.ActivityRepository;
 import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
 import myboot.app1.dao.XUserRepository;
 import myboot.app1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -51,7 +46,7 @@ public class PopulationService {
                 Faker faker = new Faker();
 
 
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 100000; i++) {
                     Person person = new Person();
                     person.setFirstName(faker.name().firstName());
                     person.setLastName(faker.name().lastName());

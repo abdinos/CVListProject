@@ -42,6 +42,8 @@
 
 
         <div v-if="(cv != null)">
+            <h1>Personne</h1>
+            <p>nom : {{cv.person.firstName}} {{cv.person.lastName}}</p>
             <h1>CV</h1>
             <p>nom : {{cv.cvName}}</p>
             <h1>Liste des activities</h1>

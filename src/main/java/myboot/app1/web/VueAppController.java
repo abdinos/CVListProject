@@ -73,7 +73,7 @@ public class VueAppController {
         ArrayList<CurriculumVitae> cvList = cvCache;
 
         int firstIndex = part*pageSize;
-        int lastIndex = part*pageSize+pageSize > cvList.size() ? cvList.size() : part*pageSize+pageSize;
+        int lastIndex = Math.min(part * pageSize + pageSize, cvList.size());
         var res = new ModelAndView("curriculumVitaeList", "cvList", cvList.subList(firstIndex,lastIndex));
         return res;
     }
