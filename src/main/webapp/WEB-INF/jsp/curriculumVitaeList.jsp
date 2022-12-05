@@ -41,13 +41,28 @@
                 <th>Personne</th>
                 <th>voir CV </th>
             </tr>
-            <tr v-for="cv in cvList">
-                <td>{{cv.cvName}}</td>
-                <td>{{cv.person.firstName}} {{cv.person.lastName}}</td>
-                <td><button v-on:click="getCvActivities(cv.id)">Montrer</button></td>
-            </tr>
-        </table>
+            <c:forEach items="${cvList}" var="cv">
+                        <tr>
+                            <td> <c:out value="${cv.cvName}" /> </td>
+                            <td> <c:out value="${cv.person.firstName}" /> </td>
+                            <td><button v-on:click="getCvActivities(${cv.id})">Montrer</button></td>
 
+                        </tr>
+            </c:forEach>
+        </table>
+        <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+            <c:choose>
+                <c:when test="${param.page != null && param.page != 0}">
+                        <a href="/cvList?page=${param.page == null || param.page == 0 ? 0 : param.page-1}" class="pagination-previous"><i id="left-arrow" class="fas fa-arrow-left"></i></a>
+                </c:when>
+
+                <c:otherwise>
+                         <a class="pagination-previous" disabled><i id="left-arr" class="fas fa-arrow-left"></i></a>
+                </c:otherwise>
+            </c:choose>
+
+            <a href="/cvList?page=${param.page == null ? 1 : param.page+1}" class="pagination-next"><i id="right-arrow" class="fas fa-arrow-right" style="margin-left: 1000px" ></i></a>
+        </nav>
         <div v-if="(cv != null)">
             <h1>CV</h1>
             <p>nom : {{cv.cvName}}</p>

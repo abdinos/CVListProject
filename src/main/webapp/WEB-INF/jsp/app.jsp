@@ -20,7 +20,7 @@
 
     <div class="d-flex justify-content-center">
         <div>
-            <h3 style="align-content: center">Welcome to our CV Manager</h3>
+            <h3 style="align-content: center">CV Manager</h3>
             <div class="input-group">
                 <form action="/result/find" id="searchForm" >
                     <%--                    <button class="btnSearchInput" type="button"><i class="fas fa-search"></i></button>--%>

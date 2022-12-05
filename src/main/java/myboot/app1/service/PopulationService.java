@@ -51,7 +51,7 @@ public class PopulationService {
                 Faker faker = new Faker();
 
 
-                for (int i = 0; i < 2000; i++) {
+                for (int i = 0; i < 10000; i++) {
                     Person person = new Person();
                     person.setFirstName(faker.name().firstName());
                     person.setLastName(faker.name().lastName());

@@ -44,6 +44,7 @@ public class CurriculumVitaeRestController {
 
     @GetMapping("/cvList")
     public Iterable<CurriculumVitae> getCvList() {
+
         return curriculumVitaeRepository.findAll();
     }
 

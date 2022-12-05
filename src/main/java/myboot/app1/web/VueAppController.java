@@ -2,6 +2,7 @@ package myboot.app1.web;
 
 import myboot.app1.dao.CurriculumVitaeRepository;
 import myboot.app1.dao.PersonRepository;
+import myboot.app1.model.CurriculumVitae;
 import myboot.app1.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller()
 public class VueAppController {
@@ -58,15 +60,26 @@ public class VueAppController {
         var res = new ModelAndView("create-cv");
         return res;
     }
-
+    ArrayList<CurriculumVitae> cvCache;
     @RequestMapping(value = "/cvList")
-    private ModelAndView cvList() {
-        var res = new ModelAndView("curriculumVitaeList");
+    private ModelAndView cvList(@RequestParam(required = false) Optional<Integer> page) {
+        int part = 0;
+        int pageSize = 10;
+        if(page.isPresent()) {
+            part = page.get();
+            if(part < 0) part = 0;
+        }
+        if(cvCache == null) cvCache = new ArrayList<CurriculumVitae>(curriculumVitaeRepository.findAll());
+        ArrayList<CurriculumVitae> cvList = cvCache;
+
+        int firstIndex = part*pageSize;
+        int lastIndex = part*pageSize+pageSize > cvList.size() ? cvList.size() : part*pageSize+pageSize;
+        var res = new ModelAndView("curriculumVitaeList", "cvList", cvList.subList(firstIndex,lastIndex));
         return res;
     }
 
     @RequestMapping(value = "/result/find")
-    private ModelAndView searchCV(@RequestParam("name")String name) {
+    private ModelAndView searchCV(@RequestParam("name") String name) {
         var cvs = curriculumVitaeRepository.getCurriculumVitaeByName(name);
         var fullName = personRepository.getPersonByFirstName("%" + name + "%");
         fullName.addAll(personRepository.getPersonByLastName("%" + name + "%"));
