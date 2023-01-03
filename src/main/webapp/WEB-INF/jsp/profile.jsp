@@ -6,7 +6,7 @@
 <div id="profile">
     <div v-if="(isLoggedIn)">
         <nav class="navbar navbar-dark bg-dark">
-            <p style="color: white"><i class="fas fa-user" style="width: 25px; height: 25px; color: white"></i>{{username}}</p>
+            <p style="color: white"><i class="fas fa-user" style="width: 25px; height: 25px; color: white"></i>{{userInfo[0]}} {{userInfo[1]}}</p>
 
             <div class="d-flex justify-content-md-center">
                 <a class="btn btn-outline-light" href="/cvList">Resumes</a>
